@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mynuu/components/navigate.dart';
+import 'package:mynuu/screens/auth/register_page.dart';
 
 class OnboardScreen extends StatelessWidget {
   const OnboardScreen({Key? key}) : super(key: key);
@@ -20,10 +22,10 @@ class OnboardScreen extends StatelessWidget {
               'assets/logos/logo.png',
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             'Applicable taxes and 18% service\ncharge will be  added to your bill.',
             style: TextStyle(
               color: Colors.white,
@@ -34,7 +36,9 @@ class OnboardScreen extends StatelessWidget {
             height: _size.height * 0.08,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              push(context: context, widget:  RegisterPage());
+            },
             child: Container(
               height: 50,
               width: _size.width / 1.05,
@@ -46,7 +50,7 @@ class OnboardScreen extends StatelessWidget {
                   width: 2,
                 ),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Tap to Start',
                   style: TextStyle(
@@ -60,7 +64,7 @@ class OnboardScreen extends StatelessWidget {
           SizedBox(
             height: _size.height * 0.15,
           ),
-          Center(
+          const Center(
             child: Text(
               'Follow us',
               style: TextStyle(
@@ -77,23 +81,23 @@ class OnboardScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/icons/facebook.png',
-                height: _size.height * 0.05,
+                height: _size.height * 0.04,
               ),
               SizedBox(
                 width: _size.width * 0.05,
               ),
               Image.asset(
                 'assets/icons/instagram.png',
-                height: _size.height * 0.05,
+                height: _size.height * 0.04,
               ),
             ],
           ),
           SizedBox(
             height: _size.height * 0.09,
           ),
-          Center(
+          const Center(
             child: Text(
-              'Powered',
+              'Powered by',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
@@ -103,6 +107,9 @@ class OnboardScreen extends StatelessWidget {
           Image.asset(
             'assets/logos/logo2.png',
             height: _size.height * 0.05,
+          ),
+          SizedBox(
+            height: _size.height * 0.01,
           ),
         ],
       ),
