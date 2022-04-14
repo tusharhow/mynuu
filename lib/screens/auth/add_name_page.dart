@@ -1,11 +1,12 @@
 import 'package:country_code_picker/country_code_picker.dart';
-
 import 'package:flutter/material.dart';
 import 'package:mynuu/components/navigate.dart';
-import 'package:mynuu/screens/auth/add_name_page.dart';
+import 'package:mynuu/screens/main/homepage.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+import '../bottom_navigation_screens.dart';
+
+class AddNamePage extends StatelessWidget {
+  const AddNamePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,6 @@ class RegisterPage extends StatelessWidget {
               width: _size.width / 1.05,
               child: TextFormField(
                 cursorColor: Colors.white,
-                keyboardType: TextInputType.number,
                 style: const TextStyle(
                     fontWeight: FontWeight.w500, color: Colors.white),
                 decoration: InputDecoration(
@@ -61,7 +61,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  labelText: 'Phone number',
+                  labelText: 'Name',
                   labelStyle: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -69,25 +69,9 @@ class RegisterPage extends StatelessWidget {
                   // this will remove the default content padding
                   // now you can customize it here or add padding widget
                   contentPadding: const EdgeInsets.only(top: 0),
-                  prefixIcon: CountryCodePicker(
-                    onChanged: print,
-                    // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                    initialSelection: 'BD',
-                    showDropDownButton: true,
-                    showFlagDialog: true,
-                    textStyle: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                    padding: const EdgeInsets.only(left: 1),
-                    favorite: const ['+880', 'BD'],
-                    // optional. Shows only country name and flag
-                    showCountryOnly: false,
-                    showFlag: true,
-                    // optional. Shows only country name and flag when popup is closed.
-                    showOnlyCountryWhenClosed: false,
-                    // optional. aligns the flag and the Text left
-                    alignLeft: false,
+                  prefixIcon: const Icon(
+                    Icons.person,
+                    color: Colors.white,
                   ),
                 ),
                 onChanged: (value) {
@@ -100,7 +84,7 @@ class RegisterPage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                push(context: context, widget: const AddNamePage());
+                push(context: context, widget: BottomNavigationScreen());
               },
               child: Container(
                 height: 50,
@@ -111,7 +95,7 @@ class RegisterPage extends StatelessWidget {
                 ),
                 child: const Center(
                   child: Text(
-                    'Next',
+                    'Submit',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,

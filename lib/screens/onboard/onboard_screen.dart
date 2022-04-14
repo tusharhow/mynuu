@@ -37,7 +37,7 @@ class OnboardScreen extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              push(context: context, widget:  RegisterPage());
+              push(context: context, widget:  const RegisterPage());
             },
             child: Container(
               height: 50,
