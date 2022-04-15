@@ -23,7 +23,7 @@ class SearchScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.black,
           elevation: 0,
-          title: Text(
+          title: const Text(
             'Search',
             style: TextStyle(
               color: Colors.white,
@@ -37,12 +37,12 @@ class SearchScreen extends StatelessWidget {
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           // search bar
           Container(
-            margin: EdgeInsets.only(top: 20),
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(20)),
             child: Row(
-              children: [
+              children: const [
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
@@ -61,11 +61,11 @@ class SearchScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.only(left: 20, bottom: 20),
             child: Row(
-              children: [
+              children: const [
                 Text(
                   'Recent searches',
                   style: TextStyle(
@@ -111,7 +111,7 @@ class SearchScreen extends StatelessWidget {
                             children: [
                               Text(
                                 _mainCoursedFood[index],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
                                 ),
@@ -121,7 +121,7 @@ class SearchScreen extends StatelessWidget {
                           SizedBox(
                             height: _size.height * 0.01,
                           ),
-                          Text(
+                          const Text(
                             'This is a very good food',
                             style: TextStyle(
                               color: Colors.white,
@@ -130,7 +130,7 @@ class SearchScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -141,8 +141,8 @@ class SearchScreen extends StatelessWidget {
                           SizedBox(
                             height: _size.height * 0.04,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
+                          const Padding(
+                            padding: EdgeInsets.only(right: 20),
                             child: Text(
                               '\$10',
                               style: TextStyle(

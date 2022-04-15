@@ -1,74 +1,130 @@
 import 'package:flutter/material.dart';
+import 'package:mynuu/components/navigate.dart';
+import 'package:mynuu/screens/favourite_products_details_page.dart';
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _size = MediaQuery.of(context).size;
+    List<String> _foodNetworkImages = [
+      'https://images.unsplash.com/photo-1541832676-9b763b0239ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RlYW1lZCUyMHZlZ2V0YWJsZXN8ZW58MHx8MHx8&w=1000&q=80',
+      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/food-styling-tips4-1591717115.jpg?crop=1.00xw:0.834xh;0,0.0568xh&resize=480:*',
+      'https://i.guim.co.uk/img/media/333ee9d52eb49a4a5056c5d42183029ad11487fe/0_126_2979_3374/master/2979.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=5a684e1432f94e1fa60c57b547a8a9ac',
+      'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhbHRoeSUyMGZvb2R8ZW58MHx8MHx8&w=1000&q=80',
+    ];
+
+    List<String> _mainCoursedFood = [
+      'Roasted Cauliflower',
+      'Molcajete de Pollo',
+      'Sopes de Pollo',
+      'Huanchinango Frito',
+    ];
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Image.asset(
-                  'assets/images/dish.png',
-                  fit: BoxFit.cover,
-                ),
-                Positioned(
-                  bottom: 200,
-                  left: 50,
-                  child: Text(
-                    '21.00',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 170,
-                  left: 50,
-                  child: Text(
-                    'Langostinos',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 120,
-                  left: 50,
-                  child: Text(
-                    'Grilled giant prawns with garlic-lime butter\nand served with white rice.',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 70,
-                  right: 80,
-                  child: Image.asset(
-                    'assets/icons/heart.png',
-                    color: Colors.white,
-                  ),
-                ),
-                Positioned(
-                    bottom: 70,
-                    right: 40,
-                    child: Icon(
-                      Icons.share,
-                      color: Colors.white,
-                    )),
-              ],
-            ),
-          ],
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          elevation: 0,
         ),
-      ),
-    );
+        backgroundColor: Colors.black,
+        body: SingleChildScrollView(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          // search bar
+
+          const SizedBox(height: 20),
+
+          SizedBox(
+            height: _size.height,
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    push(
+                        context: context,
+                        widget: const FavouriteProductDetailsScreen());
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: _size.height * 0.10,
+                            width: _size.width * 0.30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: NetworkImage(_foodNetworkImages[index]),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: _size.height * 0.02,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  _mainCoursedFood[index],
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: _size.height * 0.01,
+                            ),
+                            const Text(
+                              'This is a very good food',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Image.asset(
+                              'assets/icons/cross.png',
+                            ),
+                            SizedBox(
+                              height: _size.height * 0.04,
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.only(right: 20),
+                              child: Text(
+                                '\$10',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              itemCount: _foodNetworkImages.length,
+              shrinkWrap: true,
+            ),
+          ),
+        ])));
   }
 }
