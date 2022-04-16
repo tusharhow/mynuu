@@ -650,6 +650,44 @@ class DashboardDesktop extends StatelessWidget {
                                     ),
                                   ),
                                 ],
+                              ),
+                              SizedBox(
+                                height: _size.height * 0.01,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.white54,
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.add,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: _size.height * 0.01,
+                                      ),
+                                      Center(
+                                        child: const Text(
+                                          'Add new item',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               )
                             ],
                           ),

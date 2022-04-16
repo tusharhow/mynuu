@@ -291,433 +291,478 @@ class DashboardMobile extends StatelessWidget {
                             color: Colors.white,
                             fontSize: 15,
                           ),
-                          contentChild: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  const Text(
-                                    '#35',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                          contentChild: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Text(
+                                      '#35',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  Image.asset(
-                                    'assets/images/dish2.png',
-                                    height: _size.height * 0.05,
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Roasted Cauliflower',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    Image.asset(
+                                      'assets/images/dish2.png',
+                                      height: _size.height * 0.05,
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Cauliflower is a vegetable, often referred',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Roasted Cauliflower',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Vegetables',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Cauliflower is a vegetable, often referred',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    '1,352',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Vegetables',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    '158,500',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      '1,352',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  Container(
-                                    height: 15,
-                                    width: 15,
-                                    decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius: BorderRadius.circular(30),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      '158,500',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: _size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    '#52',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    Container(
+                                      height: 15,
+                                      width: 15,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  Image.asset(
-                                    'assets/images/dish3.png',
-                                    height: _size.height * 0.05,
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Roasted Cauliflower',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: _size.height * 0.01,
+                                ),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      '#52',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Cauliflower is a vegetable, often referred',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13,
+                                    SizedBox(width: _size.width * 0.03),
+                                    Image.asset(
+                                      'assets/images/dish3.png',
+                                      height: _size.height * 0.05,
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Vegetables',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Roasted Cauliflower',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    '1,352',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Cauliflower is a vegetable, often referred',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    '158,500',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Vegetables',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  Container(
-                                    height: 15,
-                                    width: 15,
-                                    decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(30),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      '1,352',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: _size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    '#52',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      '158,500',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  // Image.asset(
-                                  //   'assets/images/dish3.png',
-                                  //   height: _size.height * 0.05,
-                                  // ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white54,
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                        ),
-                                        child: const Center(
-                                          child: Icon(
-                                            Icons.add,
-                                            color: Colors.white,
+                                    SizedBox(width: _size.width * 0.03),
+                                    Container(
+                                      height: 15,
+                                      width: 15,
+                                      decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: _size.height * 0.01,
+                                ),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      '#52',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    // Image.asset(
+                                    //   'assets/images/dish3.png',
+                                    //   height: _size.height * 0.05,
+                                    // ),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white54,
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
+                                          child: const Center(
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: _size.height * 0.01,
-                                      ),
-                                      const Text(
-                                        'Add Image',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13,
+                                        SizedBox(
+                                          height: _size.height * 0.01,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Roasted Cauliflower',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Cauliflower is a vegetable, often referred',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Add filter',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    '',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    '-',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  Container(
-                                    height: 15,
-                                    width: 15,
-                                    decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: _size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    '#52',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  // Image.asset(
-                                  //   'assets/images/dish3.png',
-                                  //   height: _size.height * 0.05,
-                                  // ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white54,
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                        ),
-                                        child: const Center(
-                                          child: Icon(
-                                            Icons.add,
+                                        const Text(
+                                          'Add Image',
+                                          style: TextStyle(
                                             color: Colors.white,
+                                            fontSize: 13,
                                           ),
                                         ),
+                                      ],
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Roasted Cauliflower',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
                                       ),
-                                      SizedBox(
-                                        height: _size.height * 0.01,
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Cauliflower is a vegetable, often referred',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
                                       ),
-                                      const Text(
-                                        'Add Image',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13,
-                                        ),
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Add filter',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Roasted Cauliflower',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Cauliflower is a vegetable, often referred',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      '',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Add filter',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      '-',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    '',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    Container(
+                                      height: 15,
+                                      width: 15,
+                                      decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    '-',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: _size.height * 0.01,
+                                ),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      '#52',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  Container(
-                                    height: 15,
-                                    width: 15,
-                                    decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: _size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    '#52',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  // Image.asset(
-                                  //   'assets/images/dish3.png',
-                                  //   height: _size.height * 0.05,
-                                  // ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white54,
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                        ),
-                                        child: const Center(
-                                          child: Icon(
-                                            Icons.add,
-                                            color: Colors.white,
+                                    SizedBox(width: _size.width * 0.03),
+                                    // Image.asset(
+                                    //   'assets/images/dish3.png',
+                                    //   height: _size.height * 0.05,
+                                    // ),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white54,
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
+                                          child: const Center(
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: _size.height * 0.01,
-                                      ),
-                                      const Text(
-                                        'Add Image',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13,
+                                        SizedBox(
+                                          height: _size.height * 0.01,
                                         ),
+                                        const Text(
+                                          'Add Image',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Roasted Cauliflower',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Roasted Cauliflower',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Cauliflower is a vegetable, often referred',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Cauliflower is a vegetable, often referred',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    'Add filter',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Add filter',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    '',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      '',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  const Text(
-                                    '-',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      '-',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: _size.width * 0.03),
-                                  Container(
-                                    height: 15,
-                                    width: 15,
-                                    decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(30),
+                                    SizedBox(width: _size.width * 0.03),
+                                    Container(
+                                      height: 15,
+                                      width: 15,
+                                      decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              )
-                            ],
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: _size.height * 0.01,
+                                ),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      '#52',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    // Image.asset(
+                                    //   'assets/images/dish3.png',
+                                    //   height: _size.height * 0.05,
+                                    // ),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white54,
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
+                                          child: const Center(
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: _size.height * 0.01,
+                                        ),
+                                        const Text(
+                                          'Add Image',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Roasted Cauliflower',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Cauliflower is a vegetable, often referred',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      'Add filter',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      '',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    const Text(
+                                      '-',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    SizedBox(width: _size.width * 0.03),
+                                    Container(
+                                      height: 15,
+                                      width: 15,
+                                      decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: _size.height * 0.01,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: _size.width * 0.3,
+                                    ),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.white54,
+                                          ),
+                                          child: Center(
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: _size.height * 0.01,
+                                        ),
+                                        Center(
+                                          child: const Text(
+                                            'Add new item',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       )
