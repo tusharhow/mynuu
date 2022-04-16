@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/onboard/onboard_screen.dart';
+import 'screens/website/dashboard_page.dart';
+import 'screens/website/onboard_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: OnboardScreen(),
+      home: DashboardPage(),
     );
   }
 }
