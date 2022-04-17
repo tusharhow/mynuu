@@ -35,7 +35,7 @@ class Homepage extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             color: Colors.white,
           ),
-          child: Center(
+          child:const Center(
             child: Text(
               'FG',
               style: TextStyle(
@@ -45,7 +45,7 @@ class Homepage extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
+        actions:const [
           Icon(
             Icons.replay_rounded,
             color: Colors.white,
@@ -68,8 +68,8 @@ class Homepage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Row(
-              children: [
-                Text(
+              children: const[
+                 Text(
                   'Good evening',
                   style: TextStyle(
                     color: Colors.white,
@@ -91,6 +91,7 @@ class Homepage extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         height: _size.height * 0.2,
@@ -110,7 +111,7 @@ class Homepage extends StatelessWidget {
                         _foodName[index],
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
