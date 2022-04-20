@@ -66,4 +66,5 @@ class AuthService {
           duration: Duration(seconds: 2));
     }
   }
+  
 }

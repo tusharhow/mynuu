@@ -5,12 +5,46 @@ import 'screens/onboard/onboard_screen.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
+
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 void main() async {
   runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  _connectionChecker();
   _init();
+}
+
+_connectionChecker() async {
+  final bool isConnected = await InternetConnectionChecker().hasConnection;
+  final StreamSubscription<InternetConnectionStatus> listener =
+      InternetConnectionChecker().onStatusChange.listen(
+    (InternetConnectionStatus status) {
+      switch (status) {
+        case InternetConnectionStatus.connected:
+     
+          // ignore: avoid_print
+          print('Data connection is available.');
+          break;
+        case InternetConnectionStatus.disconnected:
+          Get.snackbar('Error', 'No internet connection',
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.red,
+              colorText: Colors.white,
+              margin: EdgeInsets.all(10),
+              snackStyle: SnackStyle.FLOATING,
+              duration: Duration(seconds: 2));
+
+          break;
+      }
+    },
+  );
+
+  // close listener after 30 seconds, so the program doesn't run forever
+  await Future<void>.delayed(const Duration(seconds: 30));
+  await listener.cancel();
 }
 
 _init() async {
@@ -36,7 +70,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:const OnboardScreen(),
+      home: const OnboardScreen(),
     );
   }
 }
