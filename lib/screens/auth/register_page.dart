@@ -149,13 +149,12 @@ class RegisterPage extends StatelessWidget {
               onTap: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 var code = prefs.getString('countryCode');
-                authController.saveUserData(
-                  fullName: authController.nameController.text,
-                  number: authController.phoneController.text,
-                  countryCode: code.toString(),
-                  context: context,
+                authController.createRecord(
+                  authController.nameController.text,
+                  authController.phoneController.text,
+                  code.toString(),
+                  context,
                 );
-                print(code);
               },
               child: Container(
                 height: 50,

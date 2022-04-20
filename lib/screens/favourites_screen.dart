@@ -46,77 +46,88 @@ class FavouriteScreen extends StatelessWidget {
                         widget: const FavouriteProductDetailsScreen());
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: _size.height * 0.10,
-                            width: _size.width * 0.30,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                image: NetworkImage(_foodNetworkImages[index]),
-                                fit: BoxFit.cover,
+                    padding: const EdgeInsets.all(5.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white24.withOpacity(0.15),
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: _size.height * 0.10,
+                              width: _size.width * 0.30,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image:
+                                      NetworkImage(_foodNetworkImages[index]),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: _size.height * 0.02,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  _mainCoursedFood[index],
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
+                          SizedBox(
+                            width: _size.height * 0.02,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    _mainCoursedFood[index],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: _size.height * 0.01,
-                            ),
-                            const Text(
-                              'This is a very good food',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Image.asset(
-                              'assets/icons/cross.png',
-                            ),
-                            SizedBox(
-                              height: _size.height * 0.04,
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(right: 20),
-                              child: Text(
-                                '\$10',
+                              SizedBox(
+                                height: _size.height * 0.01,
+                              ),
+                              const Text(
+                                'This is a very good food',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                          const Spacer(),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 15.0),
+                                child: Image.asset(
+                                  'assets/icons/cross.png',
+                                ),
+                              ),
+                              SizedBox(
+                                height: _size.height * 0.04,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(right: 20),
+                                child: Text(
+                                  '\$10',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
