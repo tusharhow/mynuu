@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'screens/onboard/onboard_screen.dart';
-import 'screens/website/dashboard_page.dart';
-import 'screens/website/onboard_page.dart';
+import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Mynuu',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

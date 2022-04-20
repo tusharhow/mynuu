@@ -1,16 +1,17 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:mynuu/components/navigate.dart';
-import 'package:mynuu/screens/main/homepage.dart';
-
+import 'package:mynuu/controllers/auth_controller.dart';
 import '../bottom_navigation_screens.dart';
+import 'package:get/get.dart';
 
 class AddNamePage extends StatelessWidget {
   const AddNamePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nameController = TextEditingController();
     final _size = MediaQuery.of(context).size;
+    // AuthController authController = Get.put(AuthController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -43,6 +44,7 @@ class AddNamePage extends StatelessWidget {
               height: 100,
               width: _size.width / 1.05,
               child: TextFormField(
+                controller: nameController,
                 cursorColor: Colors.white,
                 style: const TextStyle(
                     fontWeight: FontWeight.w500, color: Colors.white),
@@ -84,7 +86,8 @@ class AddNamePage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                push(context: context, widget: BottomNavigationScreen());
+                // push(context: context, widget: BottomNavigationScreen());
+                // authController.saveFullNamee(nameController.text);
               },
               child: Container(
                 height: 50,

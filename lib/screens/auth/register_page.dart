@@ -1,8 +1,8 @@
 import 'package:country_code_picker/country_code_picker.dart';
-
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:mynuu/components/navigate.dart';
-import 'package:mynuu/screens/auth/add_name_page.dart';
+import 'package:mynuu/controllers/auth_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -10,6 +10,9 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
+    final authController = Get.put(AuthService());
+
+    const countryCode = CountryCode;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -42,6 +45,7 @@ class RegisterPage extends StatelessWidget {
               height: 100,
               width: _size.width / 1.05,
               child: TextFormField(
+                controller: authController.phoneController,
                 cursorColor: Colors.white,
                 keyboardType: TextInputType.number,
                 style: const TextStyle(
@@ -70,7 +74,12 @@ class RegisterPage extends StatelessWidget {
                   // now you can customize it here or add padding widget
                   contentPadding: const EdgeInsets.only(top: 0),
                   prefixIcon: CountryCodePicker(
-                    onChanged: print,
+                    onChanged: (CountryCode countryCode) async {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setString('countryCode', countryCode.toString());
+                    },
+
                     // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
                     initialSelection: 'BD',
                     showDropDownButton: true,
@@ -90,17 +99,63 @@ class RegisterPage extends StatelessWidget {
                     alignLeft: false,
                   ),
                 ),
-                onChanged: (value) {
-                  //get value from text field here
-                },
+              ),
+            ),
+            SizedBox(
+              height: _size.height * 0.0025,
+            ),
+            SizedBox(
+              height: 100,
+              width: _size.width / 1.05,
+              child: TextFormField(
+                controller: authController.nameController,
+                cursorColor: Colors.white,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w500, color: Colors.white),
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Colors.white,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Colors.white,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  labelText: 'Name',
+                  labelStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                  // this will remove the default content padding
+                  // now you can customize it here or add padding widget
+                  contentPadding: const EdgeInsets.only(top: 0),
+                  prefixIcon: const Icon(
+                    Icons.person,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
             SizedBox(
               height: _size.height * 0.03,
             ),
             GestureDetector(
-              onTap: () {
-                push(context: context, widget: const AddNamePage());
+              onTap: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                var code = prefs.getString('countryCode');
+                authController.saveUserData(
+                  fullName: authController.nameController.text,
+                  number: authController.phoneController.text,
+                  countryCode: code.toString(),
+                  context: context,
+                );
+                print(code);
               },
               child: Container(
                 height: 50,
