@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mynuu/controllers/auth_controller.dart';
 import 'package:get/get.dart';
 import 'package:mynuu/controllers/product_controller.dart';
+import 'package:mynuu/models/product_model.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -130,12 +132,25 @@ class Homepage extends StatelessWidget {
                     ],
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    productController.addProduct();
-                  },
-                  child: Text('Add Product'),
-                ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     productController.pickImage(ImageSource.gallery);
+                //   },
+                //   child: Text('Add img'),
+                // ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     productController.uploadFile();
+                //   },
+                //   child: Text('Add Product'),
+                // ),
+
+                // ElevatedButton(
+                //   onPressed: () {
+                //     productController.uploadFile();
+                //   },
+                //   child: Text('Add Product'),
+                // ),
                 SizedBox(
                   height: _size.height * 0.05,
                 ),
@@ -148,12 +163,13 @@ class Homepage extends StatelessWidget {
                         );
                       } else {
                         return SizedBox(
-                          height: 200,
+                          height: 180,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: cont.searchList.length,
+                              itemCount: cont.products.length,
                               itemBuilder: (context, index) {
                                 final data = productController.products[index];
+                                print(data.name);
                                 return Padding(
                                   padding: const EdgeInsets.only(left: 20),
                                   child: Column(
@@ -161,18 +177,32 @@ class Homepage extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        height: _size.height * 0.2,
-                                        width: _size.width * 0.35,
+                                        height: _size.height * 0.20,
+                                        width: _size.width * 0.32,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           image: DecorationImage(
                                             image: NetworkImage(
-                                                _foodNetworkImages[index]),
+                                                data.image.toString()),
                                             fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
+                                      // ElevatedButton(
+                                      //   onPressed: () {
+                                      //     productController.addToWishList(
+                                      //         ProductModel(
+                                      //             category: data.category,
+                                      //             image: data.image,
+                                      //             name: data.name,
+                                      //             description: data.description,
+                                      //             timesLiked: data.timesLiked,
+                                      //             timesViewed: data.timesViewed,
+                                      //             access: data.access));
+                                      //   },
+                                      //   child: Text('Add wishlist'),
+                                      // ),
                                       SizedBox(
                                         height: _size.height * 0.01,
                                       ),
@@ -192,7 +222,7 @@ class Homepage extends StatelessWidget {
                       }
                     }),
                 SizedBox(
-                  height: _size.height * 0.005,
+                  height: _size.height * 0.03,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
@@ -212,76 +242,157 @@ class Homepage extends StatelessWidget {
                 SizedBox(
                   height: _size.height * 0.02,
                 ),
+
+                GetBuilder<ProductController>(
+                    init: ProductController(),
+                    builder: (cont) {
+                      if (cont.products.length == 0) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        // return SizedBox(
+                        //   height: 180,
+                        //   child: ListView.builder(
+                        //       scrollDirection: Axis.vertical,
+                        //       itemCount: cont.products.length,
+                        //       itemBuilder: (context, index) {
+                        //         // final data = productController.products[index];
+                        //         // shuffle data
+                        //         productController.products.shuffle();
+                        //         var daha = productController.products[index];
+                        //         print(daha.name);
+                        //         return Padding(
+                        //           padding: const EdgeInsets.only(left: 20),
+                        //           child: Column(
+                        //             crossAxisAlignment:
+                        //                 CrossAxisAlignment.start,
+                        //             children: [
+                        //               Container(
+                        //                 height: _size.height * 0.20,
+                        //                 width: _size.width * 0.32,
+                        //                 decoration: BoxDecoration(
+                        //                   borderRadius:
+                        //                       BorderRadius.circular(20),
+                        //                   image: DecorationImage(
+                        //                     image: NetworkImage(
+                        //                         daha.image.toString()),
+                        //                     fit: BoxFit.cover,
+                        //                   ),
+                        //                 ),
+                        //               ),
+
+                        //               SizedBox(
+                        //                 height: _size.height * 0.01,
+                        //               ),
+                        //               Text(
+                        //                 daha.name.toString(),
+                        //                 style: TextStyle(
+                        //                   color: Colors.white,
+                        //                   fontSize: 15,
+                        //                   fontWeight: FontWeight.bold,
+                        //                 ),
+                        //               ),
+                        //             ],
+                        //           ),
+                        //         );
+                        //       }),
+                        // );
+                        return SizedBox(
+                          height: 230,
+                          child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              productController.products.shuffle();
+                              var daha = productController.products[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white24.withOpacity(0.15),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: _size.height * 0.12,
+                                        width: _size.width * 0.30,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                daha.image.toString()),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      // ElevatedButton(
+                                      //   onPressed: () {
+                                      //     productController.addToWishList(
+                                      //         ProductModel(
+                                      //             price: '',
+                                      //             category: daha.category,
+                                      //             image: daha.image,
+                                      //             name: daha.name,
+                                      //             description: daha.description,
+                                      //             timesLiked: daha.timesLiked,
+                                      //             timesViewed: daha.timesViewed,
+                                      //             access: daha.access));
+                                      //   },
+                                      //   child: Text('Add wishlist'),
+                                      // ),
+                                      SizedBox(
+                                        width: _size.height * 0.02,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            daha.name.toString(),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: _size.height * 0.01,
+                                          ),
+                                          Text(
+                                            daha.description.toString(),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 20),
+                                        child: Text(
+                                          '\$${daha.price}',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            itemCount: productController.products.length,
+                            shrinkWrap: true,
+                          ),
+                        );
+                      }
+                    }),
                 SizedBox(
-                  height: 230,
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white24.withOpacity(0.15),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: _size.height * 0.12,
-                                width: _size.width * 0.30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    image:
-                                        NetworkImage(_foodNetworkImages[index]),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: _size.height * 0.02,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    _mainCoursedFood[index],
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: _size.height * 0.01,
-                                  ),
-                                  Text(
-                                    'This is a very good food',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
-                                child: Text(
-                                  '\$10',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    itemCount: _foodNetworkImages.length,
-                    shrinkWrap: true,
-                  ),
+                  height: _size.height * 0.1,
                 ),
               ],
             ),

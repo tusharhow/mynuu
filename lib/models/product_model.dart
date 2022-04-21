@@ -19,7 +19,7 @@ class ProductModel {
     required this.timesLiked,
     required this.timesViewed,
     required this.access,
-    // required this.price,
+    required this.price,
   });
 
   String? category;
@@ -29,7 +29,7 @@ class ProductModel {
   String? timesLiked;
   String? timesViewed;
   String? access;
-  // int? price;
+  String? price;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         category: json["category"] == null ? null : json["category"],
@@ -39,7 +39,7 @@ class ProductModel {
         timesLiked: json["times_liked"] == null ? null : json["times_liked"],
         timesViewed: json["times_viewed"] == null ? null : json["times_viewed"],
         access: json["access"] == null ? null : json["access"],
-        // price: json["price"] == null ? null : json["price"],
+        price: json["price"] == null ? null : json["price"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,6 +50,6 @@ class ProductModel {
         "times_liked": timesLiked == null ? null : timesLiked,
         "times_viewed": timesViewed == null ? null : timesViewed,
         "access": access == null ? null : access,
-        // "price": price == null ? null : price,
+        "price": price == null ? null : price,
       };
 }

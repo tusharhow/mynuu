@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mynuu/controllers/product_controller.dart';
+import 'package:get/get.dart';
 
 class FavouriteProductDetailsScreen extends StatelessWidget {
   const FavouriteProductDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final productController = Get.put(ProductController());
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(

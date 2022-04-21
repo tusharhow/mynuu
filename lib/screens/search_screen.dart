@@ -75,6 +75,7 @@ class SearchScreen extends StatelessWidget {
                           scrollDirection: Axis.vertical,
                           itemCount: cont.searchList.length,
                           itemBuilder: (context, index) {
+                            // final data = cont.searchList[index];
                             return Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Container(
@@ -90,8 +91,9 @@ class SearchScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         image: DecorationImage(
-                                          image: NetworkImage(
-                                              _foodNetworkImages[index]),
+                                          image: NetworkImage(cont
+                                              .searchList[index].image
+                                              .toString()),
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -137,11 +139,18 @@ class SearchScreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 20),
-                                          child: Image.asset(
-                                            'assets/icons/cross.png',
+                                        GestureDetector(
+                                          onTap: () {
+                                            searchController.text = '';
+                                            cont.searchList.clear();
+                                            
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 20),
+                                            child: Image.asset(
+                                              'assets/icons/cross.png',
+                                            ),
                                           ),
                                         ),
                                         SizedBox(

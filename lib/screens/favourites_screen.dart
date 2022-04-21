@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mynuu/components/navigate.dart';
 import 'package:mynuu/screens/favourite_products_details_page.dart';
+import 'package:get/get.dart';
+import '../controllers/product_controller.dart';
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({Key? key}) : super(key: key);
@@ -21,6 +23,7 @@ class FavouriteScreen extends StatelessWidget {
       'Sopes de Pollo',
       'Huanchinango Frito',
     ];
+    final productController = Get.put(ProductController());
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -34,108 +37,124 @@ class FavouriteScreen extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          SizedBox(
-            height: _size.height,
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    push(
-                        context: context,
-                        widget: const FavouriteProductDetailsScreen());
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white24.withOpacity(0.15),
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+          GetBuilder<ProductController>(
+              init: ProductController(),
+              builder: (cont) {
+                if (cont.getWishlist.length == 0) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return SizedBox(
+                    height: _size.height,
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            push(
+                                context: context,
+                                widget: const FavouriteProductDetailsScreen());
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
                             child: Container(
-                              height: _size.height * 0.10,
-                              width: _size.width * 0.30,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image:
-                                      NetworkImage(_foodNetworkImages[index]),
-                                  fit: BoxFit.cover,
-                                ),
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white24.withOpacity(0.15),
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: _size.height * 0.02,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                              child: Row(
                                 children: [
-                                  Text(
-                                    _mainCoursedFood[index],
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      height: _size.height * 0.10,
+                                      width: _size.width * 0.30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                          image: NetworkImage(cont
+                                              .getWishlist[index].image
+                                              .toString()),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
+                                  ),
+                                  SizedBox(
+                                    width: _size.height * 0.02,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            cont.getWishlist[index].name
+                                                .toString(),
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: _size.height * 0.01,
+                                      ),
+                                      Text(
+                                        cont.getWishlist[index].description
+                                            .toString(),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 15.0),
+                                        child: Image.asset(
+                                          'assets/icons/cross.png',
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: _size.height * 0.04,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(right: 20),
+                                        child: Text(
+                                          '\$ ${cont.getWishlist[index].price}',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: _size.height * 0.01,
-                              ),
-                              const Text(
-                                'This is a very good food',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                          const Spacer(),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 15.0),
-                                child: Image.asset(
-                                  'assets/icons/cross.png',
-                                ),
-                              ),
-                              SizedBox(
-                                height: _size.height * 0.04,
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(right: 20),
-                                child: Text(
-                                  '\$10',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                        );
+                      },
+                      itemCount: cont.getWishlist.length,
+                      shrinkWrap: true,
                     ),
-                  ),
-                );
-              },
-              itemCount: _foodNetworkImages.length,
-              shrinkWrap: true,
-            ),
-          ),
+                  );
+                }
+              }),
         ])));
   }
 }
