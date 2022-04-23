@@ -1,5 +1,8 @@
+import 'dart:async';
+import 'dart:core';
 import 'dart:io';
-
+import 'package:uuid/uuid.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,78 +12,67 @@ import 'package:path/path.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProductController extends GetxController {
-  void addProduct() async {
-    var result = await FirebaseFirestore.instance.collection('products').add({
-      // unique product id
-      'id': '${DateTime.now().millisecondsSinceEpoch}',
-      'name': 'Sandwich2',
-      'price': "565",
-      'description': 'description',
-      'image': 'image',
-      'category': 'category',
-      'times_likes': 'subCategory',
-      'times_viewed': 'userId',
-    });
-
-    update();
-    if (result != null) {
-      Get.snackbar('Success', 'Product added successfully',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          margin: EdgeInsets.all(10),
-          snackStyle: SnackStyle.FLOATING,
-          duration: Duration(seconds: 2));
-    } else {
-      Get.snackbar('Error', 'Product not added',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          margin: EdgeInsets.all(10),
-          snackStyle: SnackStyle.FLOATING,
-          duration: Duration(seconds: 2));
-    }
-  }
+  final TextEditingController ttitleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
 
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
+  bool uploading = false;
   File? photo;
   final ImagePicker _picker = ImagePicker();
 
-  Future pickImage(ImageSource source) async {
+  pickImage(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
 
     if (pickedFile != null) {
       photo = File(pickedFile.path);
+
       print(photo!.path);
-      uploadFile();
+      // uploadFile();
+      print(photo!.path);
       update();
     } else {
       print('No image selected.');
     }
   }
 
-  // add product with image
-  Future uploadFile() async {
-    final storageReference =
-        storage.ref().child('images/${basename(photo!.path)}');
-    final uploadTask = storageReference.putFile(photo!);
-    await uploadTask;
-    print('File Uploaded');
-    storageReference.getDownloadURL().then((fileURL) {
-      print('File URL: $fileURL');
-      FirebaseFirestore.instance.collection('products').add({
-        'id': '${DateTime.now().millisecondsSinceEpoch}',
-        'name': 'Shwarma',
-        'price': "565",
-        'description': 'description',
-        'image': fileURL,
-        'category': 'category',
-        'times_likes': 'subCategory',
-        'times_viewed': 'userId',
-      });
+  Future<String> uplaodImageAndSaveItemInfo() async {
+    uploading = true;
+    update();
+    PickedFile? pickedFile;
+    String? productId = const Uuid().v4();
+    if (photo != null) {
+      pickedFile = PickedFile(photo!.path);
+      await uploadFile(pickedFile);
+    } else {
+      print("No image selected");
+    }
+    return productId;
+  }
+
+  /// Flutter web image upload to firebase storage
+  Future<void> uploadFile(PickedFile? pickedFile) async {
+    final String filePath = basename(pickedFile!.path);
+    final ref = storage.ref().child(filePath);
+    final uploadTask = ref.putFile(File(pickedFile.path));
+    final downloadUrl = (await uploadTask);
+    final String url = (await downloadUrl.ref.getDownloadURL());
+    print("URL is $url");
+    FirebaseFirestore.instance.collection('products').add({
+      'id': '${DateTime.now().millisecondsSinceEpoch}',
+      'name': "ttitleController.text",
+      'price': "priceController.text",
+      'description': "descriptionController.text",
+      'image': url,
+      'category': "categoryController.text",
+      'times_likes': '',
+      'times_viewed': '',
     });
+    uploading = false;
+    update();
   }
 
 // search product
@@ -156,6 +148,8 @@ class ProductController extends GetxController {
     });
     return products;
   }
+
+  //
 
   @override
   void onInit() {

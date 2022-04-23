@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mynuu/firebase_options.dart';
 import 'package:mynuu/screens/bottom_navigation_screens.dart';
+import 'package:mynuu/screens/tes.dart';
+import 'package:mynuu/screens/website/Responsive/dashboard_desktop.dart';
+import 'package:mynuu/screens/website/onboard_page.dart';
 import 'screens/auth/register_page.dart';
 import 'screens/onboard/onboard_screen.dart';
 import 'package:get/get.dart';
@@ -9,11 +13,20 @@ import 'dart:async';
 
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+import 'screens/website/dashboard_page.dart';
+
 void main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    print('Failed to initialize' + e.toString());
+  }
   runApp(const MyApp());
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  _connectionChecker();
+
+  // _connectionChecker();
   _init();
 }
 
@@ -24,7 +37,7 @@ _connectionChecker() async {
     (InternetConnectionStatus status) {
       switch (status) {
         case InternetConnectionStatus.connected:
-     
+
           // ignore: avoid_print
           print('Data connection is available.');
           break;

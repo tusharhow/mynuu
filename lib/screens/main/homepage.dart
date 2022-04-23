@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:mynuu/controllers/auth_controller.dart';
 import 'package:get/get.dart';
@@ -132,12 +134,12 @@ class Homepage extends StatelessWidget {
                     ],
                   ),
                 ),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     productController.pickImage(ImageSource.gallery);
-                //   },
-                //   child: Text('Add img'),
-                // ),
+                ElevatedButton(
+                  onPressed: () {
+                    productController.pickImage(ImageSource.gallery);
+                  },
+                  child: Text('Add img'),
+                ),
                 // ElevatedButton(
                 //   onPressed: () {
                 //     productController.uploadFile();
@@ -145,12 +147,13 @@ class Homepage extends StatelessWidget {
                 //   child: Text('Add Product'),
                 // ),
 
-                // ElevatedButton(
-                //   onPressed: () {
-                //     productController.uploadFile();
-                //   },
-                //   child: Text('Add Product'),
-                // ),
+                ElevatedButton(
+                  onPressed: () {
+                    productController
+                        .uploadFile(PickedFile(productController.photo!.path));
+                  },
+                  child: Text('Add Product'),
+                ),
                 SizedBox(
                   height: _size.height * 0.05,
                 ),
@@ -199,7 +202,8 @@ class Homepage extends StatelessWidget {
                                       //             description: data.description,
                                       //             timesLiked: data.timesLiked,
                                       //             timesViewed: data.timesViewed,
-                                      //             access: data.access));
+                                      //             access: data.access,
+                                      //             price: data.price));
                                       //   },
                                       //   child: Text('Add wishlist'),
                                       // ),
