@@ -52,9 +52,9 @@ class FavouriteScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            push(
-                                context: context,
-                                widget: const FavouriteProductDetailsScreen());
+                            // push(
+                            //     context: context,
+                            //     widget: const FavouriteProductDetailsScreen());
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),

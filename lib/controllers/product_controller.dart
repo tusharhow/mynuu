@@ -62,9 +62,11 @@ class ProductController extends GetxController {
     final String url = (await downloadUrl.ref.getDownloadURL());
     print("URL is $url");
     FirebaseFirestore.instance.collection('products').add({
-      'id': '${DateTime.now().millisecondsSinceEpoch}',
+// generate an id for the document
+      'id':
+          '${DateTime.now().day * DateTime.now().month * DateTime.now().second}',
       'name': "ttitleController.text",
-      'price': "priceController.text",
+      'price': "69",
       'description': "descriptionController.text",
       'image': url,
       'category': "categoryController.text",
@@ -90,6 +92,28 @@ class ProductController extends GetxController {
     }
     return searchList;
   }
+
+  // get product by id and show in detail page
+  ProductModel? product;
+
+  // getProductById(String id, index) async {
+  //   var result = await FirebaseFirestore.instance
+  //       .collection('products')
+  //       .where('id', isEqualTo: id)
+  //       .get()
+  //       .then((value) => {
+  //             if (value != null)
+  //               {
+  //                 product = ProductModel.fromJson(value.docs[index].data()),
+  //                 // print(product!.id),
+  //                 update()
+  //               }
+  //             // print(product!.id),
+  //             // update()
+  //             // update(),
+  //           });
+  //   return product;
+  // }
 
   // product wishlist
   List<ProductModel> wishList = [];
@@ -149,7 +173,7 @@ class ProductController extends GetxController {
     return products;
   }
 
-  //
+
 
   @override
   void onInit() {

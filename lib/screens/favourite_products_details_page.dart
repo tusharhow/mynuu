@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mynuu/controllers/product_controller.dart';
 import 'package:get/get.dart';
+import 'package:mynuu/models/product_model.dart';
+import '../controllers/default_controller.dart';
 
 class FavouriteProductDetailsScreen extends StatelessWidget {
-  const FavouriteProductDetailsScreen({Key? key}) : super(key: key);
-
+  FavouriteProductDetailsScreen({Key? key, required this.product})
+      : super(key: key);
+  ProductModel product;
   @override
   Widget build(BuildContext context) {
     final productController = Get.put(ProductController());
+    final dController = Get.put(DefaultController());
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -15,38 +19,49 @@ class FavouriteProductDetailsScreen extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Image.asset(
-                  'assets/images/dish.png',
+                // Image.asset(
+                //   'assets/images/dish.png',
+                //   fit: BoxFit.cover,
+                // ),
+                // Image.network(
+                //   product.image.toString(),
+                //   fit: BoxFit.cover,
+                // ),
+                Image.network(
+                  product.image.toString(),
                   fit: BoxFit.cover,
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.center,
                 ),
-                const Positioned(
+                Positioned(
                   bottom: 200,
                   left: 50,
                   child: Text(
-                    '21.00',
-                    style: TextStyle(
+                    '\$${product.price.toString()}',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                     ),
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   bottom: 170,
                   left: 50,
                   child: Text(
-                    'Langostinos',
-                    style: TextStyle(
+                    product.name.toString(),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                     ),
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   bottom: 120,
                   left: 50,
                   child: Text(
-                    'Grilled giant prawns with garlic-lime butter\nand served with white rice.',
-                    style: TextStyle(
+                    product.description.toString(),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                     ),
@@ -55,17 +70,29 @@ class FavouriteProductDetailsScreen extends StatelessWidget {
                 Positioned(
                   bottom: 70,
                   right: 80,
-                  child: Image.asset(
-                    'assets/icons/heart.png',
-                    color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      dController.onFavouriteButtonClicked();
+
+                      productController.addToWishList(product);
+                    },
+                    child: GetBuilder<DefaultController>(builder: (cont) {
+                      return Image.asset(
+                        'assets/icons/heart.png',
+                        color: cont.isClicked ? Colors.red : Colors.white,
+                      );
+                    }),
                   ),
                 ),
-                const Positioned(
+                Positioned(
                     bottom: 70,
                     right: 40,
-                    child: Icon(
-                      Icons.share,
-                      color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: const Icon(
+                        Icons.share,
+                        color: Colors.white,
+                      ),
                     )),
               ],
             ),

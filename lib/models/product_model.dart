@@ -12,6 +12,7 @@ String productModelToJson(List<ProductModel> data) =>
 
 class ProductModel {
   ProductModel({
+    required this.id,
     required this.category,
     required this.image,
     required this.name,
@@ -30,6 +31,7 @@ class ProductModel {
   String? timesViewed;
   String? access;
   String? price;
+  String? id;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         category: json["category"] == null ? null : json["category"],
@@ -40,6 +42,7 @@ class ProductModel {
         timesViewed: json["times_viewed"] == null ? null : json["times_viewed"],
         access: json["access"] == null ? null : json["access"],
         price: json["price"] == null ? null : json["price"],
+        id: json["id"] == null ? null : json["id"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -51,5 +54,6 @@ class ProductModel {
         "times_viewed": timesViewed == null ? null : timesViewed,
         "access": access == null ? null : access,
         "price": price == null ? null : price,
+        "id": id == null ? null : id,
       };
 }
