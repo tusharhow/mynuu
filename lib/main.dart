@@ -27,7 +27,7 @@ void main() async {
   runApp(const MyApp());
 
   // _connectionChecker();
-  _init();
+  // _init();
 }
 
 _connectionChecker() async {
@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const OnboardScreen(),
+      home: const DashboardPage(),
     );
   }
 }
