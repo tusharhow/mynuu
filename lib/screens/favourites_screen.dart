@@ -71,7 +71,8 @@ class FavouriteScreen extends StatelessWidget {
                                       height: _size.height * 0.10,
                                       width: _size.width * 0.30,
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius:
+                                            BorderRadius.circular(10),
                                         image: DecorationImage(
                                           image: NetworkImage(cont
                                               .getWishlist[index].image
@@ -119,13 +120,25 @@ class FavouriteScreen extends StatelessWidget {
                                   Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.end,
                                     children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 15.0),
-                                        child: Image.asset(
-                                          'assets/icons/cross.png',
+                                      GestureDetector(
+                                        onTap: () {
+                                          productController
+                                              .deleteWishlistProduct(
+                                            cont.getWishlist[index].id
+                                                .toString(),
+                                            context,
+                                          );
+                                          cont.getWishlist.removeAt(index);
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 15.0),
+                                          child: Image.asset(
+                                            'assets/icons/cross.png',
+                                          ),
                                         ),
                                       ),
                                       SizedBox(

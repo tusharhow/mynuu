@@ -173,7 +173,25 @@ class ProductController extends GetxController {
     return products;
   }
 
-
+// delete wishlist product
+  deleteWishlistProduct(String productID,context) async {
+    var result = await FirebaseFirestore.instance
+        .collection('wishList')
+        .where('product.id', isEqualTo: productID)
+        .get();
+    update();
+    if (result != null) {
+      for (var doc in result.docs) {
+        doc.reference.delete();
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Product deleted from wishlist'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
+        ));
+        update();
+      }
+    }
+  }
 
   @override
   void onInit() {
