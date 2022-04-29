@@ -26,8 +26,8 @@ void main() async {
   }
   runApp(const MyApp());
 
-  // _connectionChecker();
-  // _init();
+   _connectionChecker();
+  _init();
 }
 
 _connectionChecker() async {

@@ -23,6 +23,12 @@ class SearchScreen extends StatelessWidget {
             child: TextField(
               controller: searchController,
               decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.clear, color: Colors.white),
+                    onPressed: () {
+                      searchController.clear();
+                    },
+                  ),
                   hintText: 'Search',
                   border: InputBorder.none,
                   hintStyle: TextStyle(
@@ -33,6 +39,10 @@ class SearchScreen extends StatelessWidget {
                 search = value;
                 productController.searchProduct(search);
               },
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
             ),
           ),
         ),
