@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mynuu/controllers/product_controller.dart';
 import 'package:get/get.dart';
 import 'package:mynuu/models/product_model.dart';
+import 'package:share_plus/share_plus.dart';
 import '../controllers/default_controller.dart';
 
 class FavouriteProductDetailsScreen extends StatelessWidget {
@@ -88,7 +89,12 @@ class FavouriteProductDetailsScreen extends StatelessWidget {
                     bottom: 70,
                     right: 40,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Share.share(
+                          'Check out this product ${product.name} at ${product.price}',
+                          subject: 'Check out this product',
+                        );
+                      },
                       child: const Icon(
                         Icons.share,
                         color: Colors.white,
