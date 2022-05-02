@@ -10,7 +10,7 @@ import 'package:mynuu/controllers/product_controller.dart';
 import '../../../components/top_nav_bar.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../tes.dart';
+import '../../add_new_product_desktop.dart';
 
 class DashboardDesktop extends StatefulWidget {
   const DashboardDesktop({

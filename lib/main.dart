@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mynuu/firebase_options.dart';
 import 'package:mynuu/screens/bottom_navigation_screens.dart';
-import 'package:mynuu/screens/tes.dart';
+import 'package:mynuu/screens/add_new_product_desktop.dart';
 import 'package:mynuu/screens/website/Responsive/dashboard_desktop.dart';
 import 'package:mynuu/screens/website/onboard_page.dart';
 import 'screens/auth/register_page.dart';
@@ -26,8 +26,8 @@ void main() async {
   }
   runApp(const MyApp());
 
-  //  _connectionChecker();
-  // _init();
+   _connectionChecker();
+  _init();
 }
 
 _connectionChecker() async {
@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const UploadPage(),
+      home: const OnboardScreen(),
     );
   }
 }

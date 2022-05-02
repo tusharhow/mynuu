@@ -73,9 +73,7 @@ class Homepage extends StatelessWidget {
                 ),
                 GetBuilder<ProductController>(builder: (cont) {
                   return IconButton(
-                      onPressed: () {
-                      
-                      },
+                      onPressed: () {},
                       icon: Icon(
                         Icons.replay_rounded,
                         color: Colors.white,
@@ -256,53 +254,6 @@ class Homepage extends StatelessWidget {
                           child: CircularProgressIndicator(),
                         );
                       } else {
-                        // return SizedBox(
-                        //   height: 180,
-                        //   child: ListView.builder(
-                        //       scrollDirection: Axis.vertical,
-                        //       itemCount: cont.products.length,
-                        //       itemBuilder: (context, index) {
-                        //         // final data = productController.products[index];
-                        //         // shuffle data
-                        //         productController.products.shuffle();
-                        //         var daha = productController.products[index];
-                        //         print(daha.name);
-                        //         return Padding(
-                        //           padding: const EdgeInsets.only(left: 20),
-                        //           child: Column(
-                        //             crossAxisAlignment:
-                        //                 CrossAxisAlignment.start,
-                        //             children: [
-                        //               Container(
-                        //                 height: _size.height * 0.20,
-                        //                 width: _size.width * 0.32,
-                        //                 decoration: BoxDecoration(
-                        //                   borderRadius:
-                        //                       BorderRadius.circular(20),
-                        //                   image: DecorationImage(
-                        //                     image: NetworkImage(
-                        //                         daha.image.toString()),
-                        //                     fit: BoxFit.cover,
-                        //                   ),
-                        //                 ),
-                        //               ),
-
-                        //               SizedBox(
-                        //                 height: _size.height * 0.01,
-                        //               ),
-                        //               Text(
-                        //                 daha.name.toString(),
-                        //                 style: TextStyle(
-                        //                   color: Colors.white,
-                        //                   fontSize: 15,
-                        //                   fontWeight: FontWeight.bold,
-                        //                 ),
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         );
-                        //       }),
-                        // );
                         return SizedBox(
                           height: 230,
                           child: ListView.builder(
@@ -381,6 +332,7 @@ class Homepage extends StatelessWidget {
                                                 color: Colors.white,
                                                 fontSize: 12,
                                               ),
+                                              maxLines: 1,
                                             ),
                                           ],
                                         ),
