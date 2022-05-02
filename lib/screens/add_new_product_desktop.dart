@@ -489,12 +489,14 @@ class _UploadPageState extends State<UploadPage> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 20,top: 20),
+                                  padding:
+                                      const EdgeInsets.only(left: 20, top: 20),
                                   child: Row(
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(12.0),
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
                                           color: Colors.white70,
                                           // boxShadow: [
                                           //   BoxShadow(
@@ -510,10 +512,11 @@ class _UploadPageState extends State<UploadPage> {
                                           child: itemPhotosWidgetList.isEmpty
                                               ? Center(
                                                   child: MaterialButton(
-                                                    onPressed: pickPhotoFromGallery,
+                                                    onPressed:
+                                                        pickPhotoFromGallery,
                                                     child: Container(
-                                                      alignment:
-                                                          Alignment.bottomCenter,
+                                                      alignment: Alignment
+                                                          .bottomCenter,
                                                       child: Center(
                                                         child: Image.network(
                                                           "https://static.thenounproject.com/png/3322766-200.png",
@@ -525,13 +528,15 @@ class _UploadPageState extends State<UploadPage> {
                                                   ),
                                                 )
                                               : SingleChildScrollView(
-                                                  scrollDirection: Axis.vertical,
+                                                  scrollDirection:
+                                                      Axis.vertical,
                                                   child: Wrap(
                                                     spacing: 5.0,
                                                     direction: Axis.horizontal,
-                                                    children: itemPhotosWidgetList,
-                                                    alignment:
-                                                        WrapAlignment.spaceEvenly,
+                                                    children:
+                                                        itemPhotosWidgetList,
+                                                    alignment: WrapAlignment
+                                                        .spaceEvenly,
                                                     runSpacing: 10.0,
                                                   ),
                                                 ),
@@ -540,45 +545,74 @@ class _UploadPageState extends State<UploadPage> {
                                     ],
                                   ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 50.0,
-                                        left: 100.0,
-                                        right: 100.0,
+
+                                Center(
+                                  child: GestureDetector(
+                                    onTap: uploading
+                                        ? null
+                                        : () => uplaodImageAndSaveItemInfo(),
+                                    child: Container(
+                                      height: 50,
+                                      width: _size.width / 5,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color: Colors.white,
+                                          width: 2,
+                                        ),
                                       ),
-                                      child: FlatButton(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
+                                      child: const Center(
+                                        child: Text(
+                                          'Add Product',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
                                           ),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20.0, vertical: 15.0),
-                                          color: const Color.fromRGBO(
-                                              0, 35, 102, 1),
-                                          onPressed: uploading
-                                              ? null
-                                              : () =>
-                                                  uplaodImageAndSaveItemInfo(),
-                                          child: uploading
-                                              ? const SizedBox(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                  height: 15.0,
-                                                )
-                                              : const Text(
-                                                  "Add Product",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                )),
+                                        ),
+                                      ),
                                     ),
-                                  ],
+                                  ),
                                 ),
+                                // Row(
+                                //   mainAxisAlignment: MainAxisAlignment.center,
+                                //   children: [
+                                //     Padding(
+                                //       padding: const EdgeInsets.only(
+                                //         top: 50.0,
+                                //         left: 100.0,
+                                //         right: 100.0,
+                                //       ),
+                                //       child: FlatButton(
+                                //           shape: RoundedRectangleBorder(
+                                //             borderRadius:
+                                //                 BorderRadius.circular(10),
+                                //           ),
+                                //           padding: const EdgeInsets.symmetric(
+                                //               horizontal: 20.0, vertical: 15.0),
+                                //           color: const Color.fromRGBO(
+                                //               0, 35, 102, 1),
+                                //           onPressed: uploading
+                                //               ? null
+                                //               : () =>
+                                //                   uplaodImageAndSaveItemInfo(),
+                                //           child: uploading
+                                //               ? const SizedBox(
+                                //                   child:
+                                //                       CircularProgressIndicator(),
+                                //                   height: 15.0,
+                                //                 )
+                                //               : const Text(
+                                //                   "Add Product",
+                                //                   style: TextStyle(
+                                //                     color: Colors.white,
+                                //                     fontSize: 20.0,
+                                //                     fontWeight: FontWeight.bold,
+                                //                   ),
+                                //                 )),
+                                //     ),
+                                //   ],
+                                // ),
                                 // GetBuilder<ProductController>(
                                 //     init: ProductController(),
                                 //     builder: (c) {

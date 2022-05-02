@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mynuu/controllers/auth_controller.dart';
+import 'package:mynuu/screens/add_new_product_desktop.dart';
 
 import '../../components/navigate.dart';
 import 'dashboard_page.dart';
@@ -8,6 +10,7 @@ class OnboardPageWebsiteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService();
     final _size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -25,7 +28,8 @@ class OnboardPageWebsiteView extends StatelessWidget {
           SizedBox(height: _size.height * 0.05),
           GestureDetector(
             onTap: () {
-              push(context: context, widget: const DashboardPage());
+              push(context: context, widget: const UploadPage());
+              // authService.handleSignIn();
             },
             child: Container(
               height: 50,
@@ -39,20 +43,21 @@ class OnboardPageWebsiteView extends StatelessWidget {
                 ),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Image.asset(
-                      'assets/icons/google.png',
-                      width: _size.width * 0.03,
-                      height: _size.height * 0.03,
-                    ),
-                  ),
-                  SizedBox(
-                    width: _size.width * 0.03,
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 10),
+                  //   child: Image.asset(
+                  //     'assets/icons/google.png',
+                  //     width: _size.width * 0.03,
+                  //     height: _size.height * 0.03,
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   width: _size.width * 0.03,
+                  // ),
                   const Text(
-                    'Continue with Google',
+                    'Continue ',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,

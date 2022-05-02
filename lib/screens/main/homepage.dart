@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mynuu/components/navigate.dart';
 import 'package:mynuu/controllers/auth_controller.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
     final _scaffoldKey = GlobalKey<ScaffoldState>();
-
+    final formatCurrency = new NumberFormat.simpleCurrency();
     AuthService authService = Get.put(AuthService());
     ProductController productController = Get.put(ProductController());
     return Scaffold(
@@ -114,6 +115,7 @@ class Homepage extends StatelessWidget {
                     ],
                   ),
                 ),
+
                 // ElevatedButton(
                 //   onPressed: () {
                 //     productController.pickImage(ImageSource.gallery);

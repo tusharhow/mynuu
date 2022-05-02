@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../add_new_product_desktop.dart';
 import 'Responsive/dashboard_desktop.dart';
 import 'Responsive/dashboard_mobile.dart';
 
@@ -14,7 +15,7 @@ class DashboardPage extends StatelessWidget {
         if (constraints.maxWidth < 1150 || constraints.maxHeight < 870) {
           return DashboardMobile(size: _size);
         } else {
-          return DashboardDesktop(size: _size);
+          return UploadPage();
         }
       },
     ));
