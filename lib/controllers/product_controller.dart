@@ -155,6 +155,30 @@ class ProductController extends GetxController {
     return getWishlist;
   }
 
+  // edit product
+
+  // delete product
+  deleteProduct(String id, context) async {
+    var result = await FirebaseFirestore.instance
+        .collection('products')
+        .where('id', isEqualTo: id)
+        .get();
+    update();
+    if (result != null) {
+      for (var doc in result.docs) {
+        doc.reference.delete();
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Product deleted from wishlist'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
+        ));
+
+        update();
+      }
+    }
+    update();
+  }
+
   // get all products
   List<ProductModel> products = [];
 
@@ -173,8 +197,37 @@ class ProductController extends GetxController {
     return products;
   }
 
+  // edit product by id
+  editProduct(String id, context) async {
+    var result = await FirebaseFirestore.instance
+        .collection('products')
+        .where('id', isEqualTo: id)
+        .get();
+    update();
+    if (result != null) {
+      for (var doc in result.docs) {
+        doc.reference.update({
+          'name': "ttitleController.text",
+          'price': "69",
+          'description': "descriptionController.text",
+          'image': '',
+          'category': "categoryController.text",
+          'times_likes': '',
+          'times_viewed': '',
+        });
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Product updated'),
+          backgroundColor: Colors.green,
+          duration: Duration(seconds: 2),
+        ));
+        update();
+      }
+    }
+    update();
+  }
+
 // delete wishlist product
-  deleteWishlistProduct(String productID,context) async {
+  deleteWishlistProduct(String productID, context) async {
     var result = await FirebaseFirestore.instance
         .collection('wishList')
         .where('product.id', isEqualTo: productID)

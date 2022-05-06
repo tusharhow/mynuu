@@ -26,7 +26,7 @@ void main() async {
   }
   runApp(const MyApp());
 
-  //  _connectionChecker();
+  // _connectionChecker();
   // _init();
 }
 
@@ -78,12 +78,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Mynuu',
+      title: 'Mpynuu',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const DashboardPage(),
+      home: const OnboardScreen(),
     );
   }
 }

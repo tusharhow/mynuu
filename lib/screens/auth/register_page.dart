@@ -35,7 +35,7 @@ class RegisterPage extends StatelessWidget {
               'Applicable taxes and 18% service\ncharge will be  added to your bill.',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 16, fontFamily: 'Intro',
               ),
             ),
             SizedBox(
@@ -68,7 +68,7 @@ class RegisterPage extends StatelessWidget {
                   labelText: 'Phone number',
                   labelStyle: const TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 14, fontFamily: 'Intro',
                   ),
                   // this will remove the default content padding
                   // now you can customize it here or add padding widget
@@ -130,7 +130,7 @@ class RegisterPage extends StatelessWidget {
                   labelText: 'Name',
                   labelStyle: const TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 14, fontFamily: 'Intro',
                   ),
                   // this will remove the default content padding
                   // now you can customize it here or add padding widget
@@ -168,7 +168,7 @@ class RegisterPage extends StatelessWidget {
                     'Next',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 15,
+                      fontSize: 15, fontFamily: 'Intro',
                     ),
                   ),
                 ),
@@ -182,7 +182,7 @@ class RegisterPage extends StatelessWidget {
                 'Follow us',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 16, fontFamily: 'Intro',
                 ),
               ),
             ),
@@ -213,7 +213,7 @@ class RegisterPage extends StatelessWidget {
                 'Powered by',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 16, fontFamily: 'Intro',
                 ),
               ),
             ),

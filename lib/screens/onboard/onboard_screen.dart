@@ -30,6 +30,7 @@ class OnboardScreen extends StatelessWidget {
             style: TextStyle(
               color: Colors.white,
               fontSize: 16,
+              fontFamily: 'Intro',
             ),
           ),
           SizedBox(
@@ -37,7 +38,7 @@ class OnboardScreen extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              push(context: context, widget:  const RegisterPage());
+              push(context: context, widget: const RegisterPage());
             },
             child: Container(
               height: 50,
@@ -56,6 +57,7 @@ class OnboardScreen extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
+                    fontFamily: 'Intro',
                   ),
                 ),
               ),
@@ -69,7 +71,7 @@ class OnboardScreen extends StatelessWidget {
               'Follow us',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 16, fontFamily: 'Intro',
               ),
             ),
           ),
@@ -100,7 +102,7 @@ class OnboardScreen extends StatelessWidget {
               'Powered by',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 16, fontFamily: 'Intro',
               ),
             ),
           ),

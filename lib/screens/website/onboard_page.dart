@@ -57,7 +57,7 @@ class OnboardPageWebsiteView extends StatelessWidget {
                   //   width: _size.width * 0.03,
                   // ),
                   const Text(
-                    'Continue ',
+                    'Continue',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,

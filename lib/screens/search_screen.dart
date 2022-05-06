@@ -33,7 +33,7 @@ class SearchScreen extends StatelessWidget {
                   border: InputBorder.none,
                   hintStyle: TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 16,fontFamily: 'Intro',
                   )),
               onChanged: (value) {
                 search = value;
@@ -41,7 +41,7 @@ class SearchScreen extends StatelessWidget {
               },
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 16,fontFamily: 'Intro',
               ),
             ),
           ),
@@ -59,7 +59,7 @@ class SearchScreen extends StatelessWidget {
                     'No Products Found',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 18,fontFamily: 'Intro',
                     ),
                   ),
                 ),
@@ -78,7 +78,7 @@ class SearchScreen extends StatelessWidget {
                             '',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 20,fontFamily: 'Intro',
                             ),
                           ),
                         );
@@ -150,7 +150,7 @@ class SearchScreen extends StatelessWidget {
                                                   .toString(),
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 12,
+                                                fontSize: 12,fontFamily: 'Intro',
                                               ),
                                             ),
                                           ],
@@ -185,7 +185,7 @@ class SearchScreen extends StatelessWidget {
                                                 '\$ ${cont.searchList[index].price}',
                                                 style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 12,
+                                                  fontSize: 12,fontFamily: 'Intro',
                                                 ),
                                               ),
                                             ),

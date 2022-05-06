@@ -33,7 +33,7 @@ class Homepage extends StatelessWidget {
             onPressed: () {
               authService.signOut(context);
             },
-            child: Text('Logout'),
+            child: Text('Logout',),
           ),
         ],
       )),
@@ -66,7 +66,7 @@ class Homepage extends StatelessWidget {
                         'FG',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 15,
+                          fontSize: 15,fontFamily: 'Intro',
                         ),
                       ),
                     ),
@@ -109,7 +109,7 @@ class Homepage extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold,fontFamily: 'Intro',
                         ),
                       ),
                     ],
@@ -148,7 +148,7 @@ class Homepage extends StatelessWidget {
                         );
                       } else {
                         return SizedBox(
-                          height: 180,
+                          height: 250,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: cont.products.length,
@@ -215,7 +215,7 @@ class Homepage extends StatelessWidget {
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 15,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold,fontFamily: 'Intro',
                                           ),
                                         ),
                                       ],
@@ -238,7 +238,7 @@ class Homepage extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold,fontFamily: 'Intro',
                         ),
                       ),
                     ],
@@ -322,7 +322,7 @@ class Homepage extends StatelessWidget {
                                               daha.name.toString(),
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 18,
+                                                fontSize: 18,fontFamily: 'Intro',
                                               ),
                                             ),
                                             SizedBox(
@@ -332,7 +332,7 @@ class Homepage extends StatelessWidget {
                                               daha.description.toString(),
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 12,
+                                                fontSize: 12,fontFamily: 'Intro',
                                               ),
                                               maxLines: 1,
                                             ),
@@ -346,7 +346,7 @@ class Homepage extends StatelessWidget {
                                             '\$${daha.price}',
                                             style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 12,
+                                              fontSize: 12,fontFamily: 'Intro',
                                             ),
                                           ),
                                         ),

@@ -1,18 +1,23 @@
 import 'dart:io';
 import 'dart:io' show File;
 //import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:mynuu/components/navigate.dart';
 import 'package:mynuu/controllers/product_controller.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:uuid/uuid.dart';
 import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import '../components/top_nav_bar.dart';
+import 'bottom_navigation_screens.dart';
+import 'delete_product.dart';
+import 'website/view_menu.dart';
 
 class UploadPage extends StatefulWidget {
   const UploadPage({Key? key}) : super(key: key);
@@ -39,6 +44,11 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   displayWebUploadFormScreen(context) {
+    final Uri _url = Uri.parse('http://menu.mynuutheapp.com/');
+    void _launchUrl() async {
+      if (!await launchUrl(_url)) throw 'Could not launch $_url';
+    }
+
     final _size = MediaQuery.of(context).size;
     final productController = Get.put(ProductController());
     return Scaffold(
@@ -88,19 +98,22 @@ class _UploadPageState extends State<UploadPage> {
                             ),
                             child: Row(
                               children: [
-                                Container(
-                                  height: _size.height * 0.04,
-                                  width: _size.width / 8,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffB2B3B7),
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  child: const Center(
-                                    child: Text(
-                                      'View menu in browser',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15,
+                                GestureDetector(
+                                  onTap: _launchUrl,
+                                  child: Container(
+                                    height: _size.height * 0.04,
+                                    width: _size.width / 8,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xffB2B3B7),
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        'View menu in browser',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -548,9 +561,22 @@ class _UploadPageState extends State<UploadPage> {
 
                                 Center(
                                   child: GestureDetector(
-                                    onTap: uploading
-                                        ? null
-                                        : () => uplaodImageAndSaveItemInfo(),
+                                    onTap: () {
+                                      uplaodImageAndSaveItemInfo()
+                                          .then((value) {
+                                        if (value != null) {
+                                          Get.snackbar(
+                                            'Successfull',
+                                            'Item Added Successfully',
+                                          );
+                                        } else {
+                                          Get.snackbar(
+                                            'Error',
+                                            'Something went wrong',
+                                          );
+                                        }
+                                      });
+                                    },
                                     child: Container(
                                       height: 50,
                                       width: _size.width / 5,
@@ -573,6 +599,42 @@ class _UploadPageState extends State<UploadPage> {
                                       ),
                                     ),
                                   ),
+                                ),
+                                SizedBox(
+                                  height: _size.height * 0.02,
+                                ),
+                                Center(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      push(
+                                          context: context,
+                                          widget: DeleteProduct());
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      width: _size.width / 5,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color: Colors.white,
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: const Center(
+                                        child: Text(
+                                          'Delete/Edit Product',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: _size.height * 0.01,
                                 ),
                                 // Row(
                                 //   mainAxisAlignment: MainAxisAlignment.center,
@@ -772,7 +834,7 @@ class _UploadPageState extends State<UploadPage> {
     );
     await reference.getDownloadURL().then((fileURL) {
       print('File URL: $fileURL');
-      FirebaseFirestore.instance.collection('products').add({
+      final res = FirebaseFirestore.instance.collection('products').add({
         'id': '${DateTime.now().millisecondsSinceEpoch}',
         'name': productController.ttitleController.text,
         'price': productController.priceController.text,
@@ -782,6 +844,21 @@ class _UploadPageState extends State<UploadPage> {
         'times_likes': '',
         'times_viewed': '',
       });
+      if (res != null) {
+        setState(() {
+          Get.snackbar(
+            'Added',
+            'Product Added Successfully',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            borderRadius: 10,
+            margin: EdgeInsets.all(10),
+            borderColor: Colors.green,
+            borderWidth: 2,
+          );
+        });
+      }
     });
     if (itemImagesList.length == itemImagesList.length) {
       setState(() {
