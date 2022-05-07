@@ -14,9 +14,17 @@ class DeleteProduct extends StatefulWidget {
 
 class _DeleteProductState extends State<DeleteProduct> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
     ProductController productController = Get.put(ProductController());
+    bool _isClicked = false;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -101,6 +109,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                                   //   },
                                   //   child: Text('Add wishlist'),
                                   // ),
+
                                   SizedBox(
                                     width: _size.height * 0.02,
                                   ),
@@ -156,6 +165,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                                                 widget: EditProduct(
                                                   pID: daha.id.toString(),
                                                 ));
+
                                             print(daha.id);
                                           },
                                         ),

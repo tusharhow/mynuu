@@ -207,11 +207,19 @@ class ProductController extends GetxController {
     if (result != null) {
       for (var doc in result.docs) {
         doc.reference.update({
-          'name': "ttitleController.text",
-          'price': "69",
-          'description': "descriptionController.text",
-          'image': '',
-          'category': "categoryController.text",
+          'name': ttitleController.text == 0
+              ? doc.data()['name']
+              : ttitleController.text,
+          'price': priceController.text == 0
+              ? doc.data()['price']
+              : priceController.text,
+          'description': descriptionController.text == 0
+              ? doc.data()['description']
+              : descriptionController.text,
+          'image': photo == null ? doc.data()['image'] : photo!.path,
+          'category': categoryController.text == 0
+              ? doc.data()['category']
+              : categoryController.text,
           'times_likes': '',
           'times_viewed': '',
         });
@@ -224,6 +232,41 @@ class ProductController extends GetxController {
       }
     }
     update();
+  }
+
+  // update product properties individually without changing other properties
+  // updateProduct(String id, String name, String price, String description,
+  //     String category, String image, context) async {
+  //   var result = await FirebaseFirestore.instance
+  //       .collection('products')
+  //       .where('id', isEqualTo: id)
+  //       .get();
+  //   update();
+  //   if (result != null) {
+  //     for (var doc in result.docs) {
+  //       doc.reference.update({
+  //         'name': name,
+  //         'price': price,
+  //         'description': description,
+  //         'category': category,
+  //         'image': image,
+  //       });
+  //     }
+  //   }
+  // }
+// get product by id
+  Future<ProductModel?> getProductById(String id) async {
+    var result = await FirebaseFirestore.instance
+        .collection('products')
+        .where('id', isEqualTo: id)
+        .get();
+    update();
+    if (result != null) {
+      product = ProductModel.fromJson(result.docs[0].data());
+      print(product!.name);
+      update();
+    }
+    return product;
   }
 
 // delete wishlist product
