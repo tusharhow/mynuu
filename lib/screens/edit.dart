@@ -3,6 +3,7 @@ import 'dart:io' show File;
 //import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:mynuu/components/navigate.dart';
 import 'package:mynuu/controllers/product_controller.dart';
+import 'package:mynuu/models/product_model.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
@@ -20,8 +21,6 @@ import 'delete_product.dart';
 import 'website/view_menu.dart';
 
 class EditProduct extends StatefulWidget {
-  EditProduct({Key? key, required this.pID}) : super(key: key);
-  String pID;
   @override
   State<EditProduct> createState() => _EditProductState();
 }
@@ -34,19 +33,23 @@ List<XFile>? photo = <XFile>[];
 List<XFile> itemImagesList = <XFile>[];
 
 List<String> downloadUrl = <String>[];
-final TextEditingController ttitleController = TextEditingController();
-final TextEditingController descriptionController = TextEditingController();
-final TextEditingController priceController = TextEditingController();
-final TextEditingController categoryController = TextEditingController();
+bool loader = false;
+TextEditingController titleController = TextEditingController();
+TextEditingController descriptionController = TextEditingController();
+TextEditingController priceController = TextEditingController();
+TextEditingController categoryController = TextEditingController();
 bool uploading = false;
 final productController = Get.put(ProductController());
 
 class _EditProductState extends State<EditProduct> {
+  ProductModel _productModel = Get.arguments;
   @override
   void initState() {
-    // TODO: implement initState
+    titleController = TextEditingController(text: _productModel.name);
+    descriptionController = TextEditingController(text: _productModel.description);
+    priceController = TextEditingController(text: _productModel.price);
+    categoryController = TextEditingController(text: _productModel.category);
     super.initState();
-    productController.getProductById(widget.pID);
   }
 
   @override
@@ -108,7 +111,7 @@ class _EditProductState extends State<EditProduct> {
                             child: SizedBox(
                               width: _size.width * 0.25,
                               child: TextFormField(
-                                controller: ttitleController,
+                                controller: titleController,
                                 decoration: InputDecoration(
                                   labelText: 'Product Name',
                                   labelStyle: TextStyle(
@@ -333,7 +336,7 @@ class _EditProductState extends State<EditProduct> {
                                             alignment: Alignment.bottomCenter,
                                             child: Center(
                                               child: Image.network(
-                                                "https://static.thenounproject.com/png/3322766-200.png",
+                                                _productModel.image.toString(),
                                                 height: 80.0,
                                                 width: 80.0,
                                               ),
@@ -360,27 +363,42 @@ class _EditProductState extends State<EditProduct> {
                         height: _size.height * 0.03,
                       ),
                       Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            uplaodImageAndSaveItemInfo();
-                          },
-                          child: Container(
-                            height: 50,
-                            width: _size.width / 1.5,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 2,
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Update Product',
-                                style: TextStyle(
+                        child: Container(
+                          height: 50,
+                          child: loader
+                              ? const Center(
+                               child: CircularProgressIndicator(),
+                          )
+                              : GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                loader = true;
+                              });
+                              itemPhotosWidgetList.isNotEmpty?
+                              uplaodImageAndSaveItemInfo()
+                              : print("old image");
+                              setState(() {
+                                loader = false;
+                              });
+                            },
+                            child: Container(
+                              height: 50,
+                              width: _size.width / 1.5,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(
                                   color: Colors.white,
-                                  fontSize: 15,
+                                  width: 2,
+                                ),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Update Product',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),
                                 ),
                               ),
                             ),
@@ -547,15 +565,12 @@ class _EditProductState extends State<EditProduct> {
 
   pickPhotoFromGallery() async {
     photo = await _picker.pickMultiImage();
-    if (photo != null) {
-      setState(() {
+    setState(() {
         itemImagesList = itemImagesList + photo!;
         addImage();
         photo!.clear();
       });
-    } else {
-      print("No image selected");
-    }
+
   }
 
   Future<String> uplaodImageAndSaveItemInfo() async {
@@ -567,12 +582,6 @@ class _EditProductState extends State<EditProduct> {
     for (int i = 0; i < itemImagesList.length; i++) {
       file = File(itemImagesList[i].path);
       pickedFile = PickedFile(file!.path);
-      if (pickedFile != null) {
-        await uploadImageToStorage(pickedFile, productId);
-      } else {
-        print("No image selected");
-      }
-
       await uploadImageToStorage(pickedFile, productId);
     }
     return productId;
@@ -589,48 +598,9 @@ class _EditProductState extends State<EditProduct> {
       print('File URL: $fileURL');
       var result = await FirebaseFirestore.instance
           .collection('products')
-          .where('id', isEqualTo: widget.pID)
+          .where('id',)
           .get();
-      if (result != null) {
-        for (var doc in result.docs) {
-          var data = doc.data();
-          // data['images'].add(fileURL);
-          // await FirebaseFirestore.instance
-
-          //     .collection('products')
-          //     .doc(widget.pID)
-          //     .update(data);
-          print(data['image']);
-
-          doc.reference.update({
-            // 'name': ttitleController.text,
-            // 'price': priceController.text,
-            // 'description': descriptionController.text,
-            // 'image': fileURL,
-            // 'category': categoryController.text,
-            // 'times_likes': '',
-            // 'times_viewed': '',
-            'name': 'kkkkkkk',
-            'price': "6999",
-            'description': 'Helell',
-            'image': fileURL == null ? data['image'] : fileURL,
-            'category': 'categoryController.text',
-            'times_likes': '',
-            'times_viewed': '',
-          });
-          setState(() {});
-          print('Hjjjjjjjjjjjjjjjjjjjjjjjjj');
-
-          Get.snackbar(
-            result.docs[0].data()['name'],
-            'Product update Successfully',
-            snackPosition: SnackPosition.TOP,
-            colorText: Colors.white,
-          );
-        }
-      } else {
-        print('No data');
-      }
+      print("image uploaded: $fileURL");
     });
     if (itemImagesList.length == itemImagesList.length) {
       setState(() {
