@@ -31,34 +31,25 @@ class _DeleteProductState extends State<DeleteProduct> {
       backgroundColor: Colors.black,
       body: Column(
         children: [
-          GetBuilder<ProductController>(
-              init: ProductController(),
-              builder: (cont) {
-                if (cont.products.length == 0) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return SizedBox(
-                    height: _size.height,
-                    child: ListView.builder(
-                      reverse: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        // productController.products.shuffle();
-                        var daha = productController.products[index];
-                        // var rev = productController.products.reversed;
-                        // print(rev.elementAt(index).name);
-                        // RIGHT TO LEFT DELETE
+          StreamBuilder<List<ProductModel>>(
+              builder:
+                  (context, AsyncSnapshot<List<ProductModel>> snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    primary: false,
+                    shrinkWrap: true,
 
-                        return Dismissible(
+                    itemBuilder: (context, index) {
+                      ProductModel daha = snapshot.data![index];
+                      return Dismissible(
                           background: Container(
                             color: Colors.red,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
+                              children: const [
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 20),
+                                  padding: EdgeInsets.only(right: 20),
                                   child: Icon(
                                     Icons.delete,
                                     color: Colors.white,
@@ -69,10 +60,10 @@ class _DeleteProductState extends State<DeleteProduct> {
                           ),
                           key: UniqueKey(),
                           onDismissed: (direction) {
-                            setState(() {
-                              cont.deleteProduct(daha.id.toString(), context);
-                              cont.products.removeAt(index);
-                            });
+                            // setState(() {
+                            //   cont.deleteProduct(daha.id.toString(), context);
+                            //   cont.products.removeAt(index);
+                            // });
                             print(daha.id);
                           },
                           child: Padding(
@@ -167,7 +158,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                                                 arguments: daha
                                             );
 
-                                            print(daha.name);
+                                            print(daha.toString());
                                           },
                                         ),
                                       ),
@@ -178,13 +169,15 @@ class _DeleteProductState extends State<DeleteProduct> {
                             ),
                           ),
                         );
-                      },
-                      itemCount: productController.products.length,
-                      shrinkWrap: true,
-                    ),
-                  );
+                  },
+                // itemCount: (snapshot.data as QuerySnapshot).documents.length,) ,
+                itemCount: snapshot.data?.length ?? 0,
+                );
+                } else {
+                return const CircularProgressIndicator();
                 }
-              }),
+              },
+              stream: ProductModel.getProducts()),
         ],
       ),
     );

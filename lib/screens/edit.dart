@@ -371,18 +371,28 @@ class _EditProductState extends State<EditProduct> {
                           )
                               : GestureDetector(
                             onTap: () async {
-                              setState(() {
-                                loader = true;
-                              });
                               if(itemPhotosWidgetList.isNotEmpty)
-                              {uplaodImageAndSaveItemInfo();}
+                              {
+                                uplaodImageAndSaveItemInfo();
+                              }
 
                               else{
-                              print("old");
-                              }
+                                setState(() {
+                                  loader = true;
+                                });
+                                _productModel.name =titleController.text;
+                                _productModel.description =descriptionController.text;
+                                _productModel.price =priceController.text;
+                                _productModel.category =categoryController.text;
+                                _productModel.timesLiked ="";
+                                _productModel.timesViewed ="";
+                                _productModel.access ="";
+                                await _productModel.update();
+                                Get.back();
                               setState(() {
                                 loader = false;
                               });
+                              }
                             },
                             child: Container(
                               height: 50,
@@ -598,12 +608,26 @@ class _EditProductState extends State<EditProduct> {
       SettableMetadata(contentType: 'image/jpeg'),
     );
     await reference.getDownloadURL().then((fileURL) async {
-      print('File URL: $fileURL');
+      if (kDebugMode) {
+        print('File URL: $fileURL');
+      }
       var result = await FirebaseFirestore.instance
           .collection('products')
           .where('id',)
           .get();
-      print("image uploaded: $fileURL");
+      if (kDebugMode) {
+        print("image uploaded: $fileURL");
+      }
+      _productModel.name =titleController.text;
+      _productModel.description =descriptionController.text;
+      _productModel.price =priceController.text;
+      _productModel.category =categoryController.text;
+      _productModel.image =fileURL.toString();
+      _productModel.timesLiked ="";
+      _productModel.timesViewed ="";
+      _productModel.access ="";
+      await _productModel.update();
+      Get.back();
     });
     if (itemImagesList.length == itemImagesList.length) {
       setState(() {

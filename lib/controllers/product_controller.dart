@@ -87,7 +87,7 @@ class ProductController extends GetxController {
     update();
     if (result != null) {
       searchList =
-          result.docs.map((e) => ProductModel.fromJson(e.data())).toList();
+          result.docs.map((e) => ProductModel.fromMap(e.data())).toList();
       update();
     }
     return searchList;
@@ -120,7 +120,7 @@ class ProductController extends GetxController {
   addToWishList(ProductModel product) async {
     var result = await FirebaseFirestore.instance
         .collection('wishList')
-        .add({'product': product.toJson()});
+        .add({'product': product.toMap()});
     update();
     if (result != null) {
       Get.snackbar('Success', 'Product added to wishlist',
@@ -148,7 +148,7 @@ class ProductController extends GetxController {
     update();
     if (result != null) {
       getWishlist = result.docs
-          .map((e) => ProductModel.fromJson(e.data()['product']))
+          .map((e) => ProductModel.fromMap(e.data()['product']))
           .toList();
       update();
     }
@@ -189,7 +189,7 @@ class ProductController extends GetxController {
         .get()
         .then((value) {
       for (var doc in value.docs) {
-        products.add(ProductModel.fromJson(doc.data()));
+        products.add(ProductModel.fromMap(doc.data()));
         // print(doc.data()['name']);
         update();
       }
@@ -262,7 +262,7 @@ class ProductController extends GetxController {
         .get();
     update();
     if (result != null) {
-      product = ProductModel.fromJson(result.docs[0].data());
+      product = ProductModel.fromMap(result.docs[0].data());
       print(product!.name);
       update();
     }

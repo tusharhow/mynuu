@@ -1,18 +1,18 @@
-// To parse this JSON data, do
-//
-//     final productModel = productModelFromJson(jsonString);
 
-import 'dart:convert';
-
-List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(
-    json.decode(str).map((x) => ProductModel.fromJson(x)));
-
-String productModelToJson(List<ProductModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+import '../firebase_collections.dart';
 
 class ProductModel {
+  late String? id;
+  late String? category;
+  late String? image;
+  late String? name;
+  late String? description;
+  late String? timesLiked;
+  late String? timesViewed;
+  late String? access;
+  late String? price;
   ProductModel({
-    required this.id,
+    this.id,
     required this.category,
     required this.image,
     required this.name,
@@ -23,37 +23,125 @@ class ProductModel {
     required this.price,
   });
 
-  late String? category;
-  late String? image;
-  late String? name;
-  late String? description;
-  late String? timesLiked;
-  late String? timesViewed;
-  late String? access;
-  late String? price;
-  late String? id;
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-        category: json["category"] == null ? null : json["category"],
-        image: json["image"] == null ? null : json["image"],
-        name: json["name"] == null ? null : json["name"],
-        description: json["description"] == null ? null : json["description"],
-        timesLiked: json["times_liked"] == null ? null : json["times_liked"],
-        timesViewed: json["times_viewed"] == null ? null : json["times_viewed"],
-        access: json["access"] == null ? null : json["access"],
-        price: json["price"] == null ? null : json["price"],
-        id: json["id"] == null ? null : json["id"],
-      );
+    return other is ProductModel &&
+        other.id == id &&
+        other.name == name &&
+        other.image == image &&
+        other.description == description &&
+        other.timesLiked == timesLiked &&
+        other.access == access &&
+        other.category == category &&
+        other.timesViewed == timesViewed &&
+        other.price == price;
+  }
 
-  Map<String, dynamic> toJson() => {
-        "category": category == null ? null : category,
-        "image": image == null ? null : image,
-        "name": name == null ? null : name,
-        "description": description == null ? null : description,
-        "times_liked": timesLiked == null ? null : timesLiked,
-        "times_viewed": timesViewed == null ? null : timesViewed,
-        "access": access == null ? null : access,
-        "price": price == null ? null : price,
-        "id": id == null ? null : id,
-      };
+  @override
+  int get hashCode {
+    return id.hashCode ^
+    name.hashCode ^
+    image.hashCode ^
+    description.hashCode ^
+    timesLiked.hashCode ^
+    category.hashCode ^
+    timesViewed.hashCode ^
+    price.hashCode ^
+    access.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'ProductModel(id: $id, name: $name, image: $image, description: $description, timesLiked: $timesLiked, price: $price, access: $access, timesViewed: $timesViewed, category: $category)';
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'image': image,
+      'description': description,
+      'timesLiked': timesLiked,
+      'timesViewed': timesViewed,
+      'category': category,
+      'price': price,
+      'access': access,
+    };
+  }
+
+  factory ProductModel.fromMap(Map<String, dynamic> map) {
+    return ProductModel(
+      id: map['id'],
+      name: map['name'],
+      image: map['image'],
+      description: map['description'],
+      timesLiked: map['timesLiked'],
+      price: map['price'],
+      timesViewed: map['timesViewed'],
+      category: map['category'],
+      access: map['access'],
+    );
+  }
+
+  ProductModel copyWith({
+    String? id,
+    String? name,
+    String? image,
+    String? description,
+    String? timesLiked,
+    String? price,
+    String? timesViewed,
+    String? category,
+    String? access,
+  }) {
+    return ProductModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      image: image ?? this.image,
+      description: description ?? this.description,
+      timesLiked: timesLiked ?? this.timesLiked,
+      price: price ?? this.price,
+      timesViewed: timesViewed ?? this.timesViewed,
+      category: category ?? this.category,
+      access: access ?? this.access,
+    );
+  }
+
+  save() async {
+    await FirebaseCollections.PRODUCTCOLLECTION.doc(id).set(toMap());
+  }
+
+  static Stream<List<ProductModel>> getProducts() {
+    try {
+      return FirebaseCollections.PRODUCTCOLLECTION.snapshots().map((snapshot) {
+        return snapshot.docs.map((doc) {
+          return ProductModel.fromMap(doc.data() as Map<String, dynamic>)
+            ..id = doc.id;
+        }).toList();
+      });
+    } on Exception catch (e) {
+      rethrow;
+    }
+  }
+
+  update() async {
+    await FirebaseCollections.PRODUCTCOLLECTION.doc(id).update(toMap());
+  }
+
+  delete() async {
+    await FirebaseCollections.PRODUCTCOLLECTION.doc(id).delete();
+  }
+
+  static Stream<List<ProductModel>> getAll() {
+    return FirebaseCollections.PRODUCTCOLLECTION
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return ProductModel.fromMap(doc.data() as Map<String, dynamic>)
+          ..id = doc.id;
+      }).toList();
+    });
+  }
 }

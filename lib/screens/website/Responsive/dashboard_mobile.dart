@@ -16,6 +16,7 @@ import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
+import '../../../models/product_model.dart';
 import '../../bottom_navigation_screens.dart';
 import '../../delete_product.dart';
 
@@ -933,19 +934,18 @@ class _DashboardMobileState extends State<DashboardMobile> {
       await pickedFile.readAsBytes(),
       SettableMetadata(contentType: 'image/jpeg'),
     );
-    await reference.getDownloadURL().then((fileURL) {
+    await reference.getDownloadURL().then((fileURL) async {
       print('File URL: $fileURL');
-      final res = FirebaseFirestore.instance.collection('products').add({
-        'id': '${DateTime.now().millisecondsSinceEpoch}',
-        'name': productController.ttitleController.text,
-        'price': productController.priceController.text,
-        'description': productController.descriptionController.text,
-        'image': fileURL,
-        'category': productController.categoryController.text,
-        'times_likes': '',
-        'times_viewed': '',
-      });
-      if (res != null) {
+      await ProductModel(
+          name: productController.ttitleController.text,
+          price: productController.priceController.text,
+          description: productController.descriptionController.text,
+          image: fileURL,
+          category: productController.categoryController.text,
+          timesLiked: '',
+          timesViewed: '',
+          access: '',
+      ).save();
         setState(() {
           Get.snackbar(
             'Added',
@@ -959,7 +959,6 @@ class _DashboardMobileState extends State<DashboardMobile> {
             borderWidth: 2,
           );
         });
-      }
     });
     if (itemImagesList.length == itemImagesList.length) {
       setState(() {

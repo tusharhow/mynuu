@@ -15,8 +15,10 @@ import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import '../components/top_nav_bar.dart';
+import '../models/product_model.dart';
 import 'bottom_navigation_screens.dart';
 import 'delete_product.dart';
+import 'edit.dart';
 import 'website/view_menu.dart';
 
 class UploadPage extends StatefulWidget {
@@ -295,8 +297,7 @@ class _UploadPageState extends State<UploadPage> {
                                       child: SizedBox(
                                         width: _size.width * 0.25,
                                         child: TextFormField(
-                                          controller: productController
-                                              .ttitleController,
+                                          controller: titleController,
                                           decoration: InputDecoration(
                                             labelText: 'Product Name',
                                             labelStyle: TextStyle(
@@ -353,8 +354,7 @@ class _UploadPageState extends State<UploadPage> {
                                       child: SizedBox(
                                         width: _size.width * 0.25,
                                         child: TextFormField(
-                                          controller: productController
-                                              .descriptionController,
+                                          controller: descriptionController,
                                           decoration: InputDecoration(
                                             labelText: 'Description',
                                             labelStyle: TextStyle(
@@ -413,7 +413,7 @@ class _UploadPageState extends State<UploadPage> {
                                         width: _size.width * 0.25,
                                         child: TextFormField(
                                           controller:
-                                              productController.priceController,
+                                              priceController,
                                           decoration: InputDecoration(
                                             labelText: 'Price',
                                             labelStyle: TextStyle(
@@ -470,8 +470,7 @@ class _UploadPageState extends State<UploadPage> {
                                       child: SizedBox(
                                         width: _size.width * 0.25,
                                         child: TextFormField(
-                                          controller: productController
-                                              .categoryController,
+                                          controller: categoryController,
                                           decoration: InputDecoration(
                                             labelText: 'Category',
                                             labelStyle: TextStyle(
@@ -832,20 +831,21 @@ class _UploadPageState extends State<UploadPage> {
       await pickedFile.readAsBytes(),
       SettableMetadata(contentType: 'image/jpeg'),
     );
-    await reference.getDownloadURL().then((fileURL) {
-      print('File URL: $fileURL');
-      final res = FirebaseFirestore.instance.collection('products').add({
-        'id': '${DateTime.now().millisecondsSinceEpoch}',
-        'name': productController.ttitleController.text,
-        'price': productController.priceController.text,
-        'description': productController.descriptionController.text,
-        'image': fileURL,
-        'category': productController.categoryController.text,
-        'times_likes': '',
-        'times_viewed': '',
-      });
-      if (res != null) {
-        setState(() {
+    await reference.getDownloadURL().then((fileURL) async {
+      if (kDebugMode) {
+        print('File URL: $fileURL');
+      }
+      await ProductModel(
+        name: titleController.text,
+        price: priceController.text,
+        description: descriptionController.text,
+        image: fileURL,
+        category: categoryController.text,
+        timesLiked: '',
+        timesViewed: '',
+        access: '',
+      ).save();
+      setState(() {
           Get.snackbar(
             'Added',
             'Product Added Successfully',
@@ -858,7 +858,6 @@ class _UploadPageState extends State<UploadPage> {
             borderWidth: 2,
           );
         });
-      }
     });
     if (itemImagesList.length == itemImagesList.length) {
       setState(() {
