@@ -367,16 +367,19 @@ class _EditProductState extends State<EditProduct> {
                           height: 50,
                           child: loader
                               ? const Center(
-                               child: CircularProgressIndicator(),
+                               child: CircularProgressIndicator(color: Colors.red,),
                           )
                               : GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               setState(() {
                                 loader = true;
                               });
-                              itemPhotosWidgetList.isNotEmpty?
-                              uplaodImageAndSaveItemInfo()
-                              : print("old image");
+                              if(itemPhotosWidgetList.isNotEmpty)
+                              {uplaodImageAndSaveItemInfo();}
+
+                              else{
+                              print("old");
+                              }
                               setState(() {
                                 loader = false;
                               });

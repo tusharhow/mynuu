@@ -23,15 +23,15 @@ class ProductModel {
     required this.price,
   });
 
-  String? category;
-  String? image;
-  String? name;
-  String? description;
-  String? timesLiked;
-  String? timesViewed;
-  String? access;
-  String? price;
-  String? id;
+  late String? category;
+  late String? image;
+  late String? name;
+  late String? description;
+  late String? timesLiked;
+  late String? timesViewed;
+  late String? access;
+  late String? price;
+  late String? id;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         category: json["category"] == null ? null : json["category"],
