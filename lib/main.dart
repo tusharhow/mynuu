@@ -4,6 +4,7 @@ import 'package:mynuu/screens/bottom_navigation_screens.dart';
 import 'package:mynuu/screens/add_new_product_desktop.dart';
 import 'package:mynuu/screens/website/Responsive/dashboard_desktop.dart';
 import 'package:mynuu/screens/website/onboard_page.dart';
+import 'Core/AppRoutes.dart';
 import 'screens/auth/register_page.dart';
 import 'screens/onboard/onboard_screen.dart';
 import 'package:get/get.dart';
@@ -84,6 +85,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const DashboardPage(),
+      getPages: AppRoutes.routes,
     );
   }
 }

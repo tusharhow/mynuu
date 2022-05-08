@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mynuu/models/product_model.dart';
+import '../Core/AppRoutes.dart';
 import '../components/navigate.dart';
 import '../controllers/product_controller.dart';
 import 'edit.dart';
@@ -145,7 +147,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                                             const EdgeInsets.only(right: 20),
                                         child: Text(
                                           '\$${daha.price}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 12,
                                           ),
@@ -155,18 +157,17 @@ class _DeleteProductState extends State<DeleteProduct> {
                                         padding:
                                             const EdgeInsets.only(right: 20),
                                         child: IconButton(
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.edit,
                                             color: Colors.white,
                                           ),
                                           onPressed: () {
-                                            push(
-                                                context: context,
-                                                widget: EditProduct(
-                                                  pID: daha.id.toString(),
-                                                ));
+                                            Get.toNamed(
+                                                AppRoutes.EDITPRODUCT,
+                                                arguments: daha
+                                            );
 
-                                            print(daha.id);
+                                            print(daha.name);
                                           },
                                         ),
                                       ),
