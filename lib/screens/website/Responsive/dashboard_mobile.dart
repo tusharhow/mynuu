@@ -379,7 +379,7 @@ class _DashboardMobileState extends State<DashboardMobile> {
                                               width: widget._size.width / 1.5,
                                               child: TextFormField(
                                                 controller: productController
-                                                    .ttitleController,
+                                                    .titleController,
                                                 decoration: InputDecoration(
                                                   labelText: 'Product Name',
                                                   labelStyle: TextStyle(
@@ -937,7 +937,7 @@ class _DashboardMobileState extends State<DashboardMobile> {
       print('File URL: $fileURL');
       final res = FirebaseFirestore.instance.collection('products').add({
         'id': '${DateTime.now().millisecondsSinceEpoch}',
-        'name': productController.ttitleController.text,
+        'name': productController.titleController.text,
         'price': productController.priceController.text,
         'description': productController.descriptionController.text,
         'image': fileURL,

@@ -44,7 +44,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         // productController.products.shuffle();
-                        var daha = productController.products[index];
+                        var data = productController.products[index];
                         // var rev = productController.products.reversed;
                         // print(rev.elementAt(index).name);
                         // RIGHT TO LEFT DELETE
@@ -68,10 +68,10 @@ class _DeleteProductState extends State<DeleteProduct> {
                           key: UniqueKey(),
                           onDismissed: (direction) {
                             setState(() {
-                              cont.deleteProduct(daha.id.toString(), context);
+                              cont.deleteProduct(data.id.toString(), context);
                               cont.products.removeAt(index);
                             });
-                            print(daha.id);
+                            print(data.id);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -89,7 +89,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                                       borderRadius: BorderRadius.circular(10),
                                       image: DecorationImage(
                                         image:
-                                            NetworkImage(daha.image.toString()),
+                                            NetworkImage(data.image.toString()),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -118,7 +118,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        daha.name.toString(),
+                                        data.name.toString(),
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 18,
@@ -128,7 +128,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                                         height: _size.height * 0.01,
                                       ),
                                       Text(
-                                        daha.description.toString(),
+                                        data.description.toString(),
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 12,
@@ -144,7 +144,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                                         padding:
                                             const EdgeInsets.only(right: 20),
                                         child: Text(
-                                          '\$${daha.price}',
+                                          '\$${data.price}',
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 12,
@@ -160,13 +160,10 @@ class _DeleteProductState extends State<DeleteProduct> {
                                             color: Colors.white,
                                           ),
                                           onPressed: () {
-                                            push(
-                                                context: context,
-                                                widget: EditProduct(
-                                                  pID: daha.id.toString(),
+                                            print("PID On Tap: ${data.id}");
+                                            Get.to(() => EditProduct(
+                                                  pID: data.id!,
                                                 ));
-
-                                            print(daha.id);
                                           },
                                         ),
                                       ),

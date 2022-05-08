@@ -295,8 +295,8 @@ class _UploadPageState extends State<UploadPage> {
                                       child: SizedBox(
                                         width: _size.width * 0.25,
                                         child: TextFormField(
-                                          controller: productController
-                                              .ttitleController,
+                                          controller:
+                                              productController.titleController,
                                           decoration: InputDecoration(
                                             labelText: 'Product Name',
                                             labelStyle: TextStyle(
@@ -836,7 +836,7 @@ class _UploadPageState extends State<UploadPage> {
       print('File URL: $fileURL');
       final res = FirebaseFirestore.instance.collection('products').add({
         'id': '${DateTime.now().millisecondsSinceEpoch}',
-        'name': productController.ttitleController.text,
+        'name': productController.titleController.text,
         'price': productController.priceController.text,
         'description': productController.descriptionController.text,
         'image': fileURL,

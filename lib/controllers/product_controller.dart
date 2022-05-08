@@ -12,7 +12,7 @@ import 'package:path/path.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProductController extends GetxController {
-  final TextEditingController ttitleController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController categoryController = TextEditingController();
@@ -189,7 +189,7 @@ class ProductController extends GetxController {
         .get()
         .then((value) {
       for (var doc in value.docs) {
-        products.add(ProductModel.fromJson(doc.data()));
+        products.add(ProductModel.fromDocumentSnapshot(doc));
         // print(doc.data()['name']);
         update();
       }
@@ -207,9 +207,9 @@ class ProductController extends GetxController {
     if (result != null) {
       for (var doc in result.docs) {
         doc.reference.update({
-          'name': ttitleController.text == 0
+          'name': titleController.text == 0
               ? doc.data()['name']
-              : ttitleController.text,
+              : titleController.text,
           'price': priceController.text == 0
               ? doc.data()['price']
               : priceController.text,

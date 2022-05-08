@@ -3,6 +3,7 @@
 //     final productModel = productModelFromJson(jsonString);
 
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(
     json.decode(str).map((x) => ProductModel.fromJson(x)));
@@ -56,4 +57,19 @@ class ProductModel {
         "price": price == null ? null : price,
         "id": id == null ? null : id,
       };
+
+  factory ProductModel.fromDocumentSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    return ProductModel(
+      id: snapshot.id,
+      category: snapshot.data()!['category'],
+      image: snapshot.data()!['image'],
+      name: snapshot.data()!['name'],
+      description: snapshot.data()!['description'],
+      timesLiked: snapshot.data()!['times_liked'],
+      timesViewed: snapshot.data()!['times_viewed'],
+      access: snapshot.data()!['access'],
+      price: snapshot.data()!['price'],
+    );
+  }
 }
